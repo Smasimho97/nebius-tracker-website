@@ -1,0 +1,115 @@
+.footer {
+  display: flex;
+  justify-content: center;
+}
+
+.disclaimerContainer {
+  width: 50%;
+
+  padding-right: 4rem;
+}
+
+.disclaimerHeader {
+  margin: 0;
+  padding: 0;
+
+  font-family: var(--font-tertiary);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+  color: var(--text-header-color);
+}
+
+.disclaimerBody {
+  margin-top: 0.5rem;
+
+  font-family: var(--font-tertiary);
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--text-primary-color);
+}
+
+.subscribeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sideBySideWrap {
+  display: flex;
+
+  margin: 0.75rem;
+}
+
+.callToAction {
+  margin: 0;
+  padding: 0;
+
+  font-family: var(--font-tertiary);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+  color: var(--text-accent-color);
+  text-decoration: underline;
+}
+
+.inputBox {
+  width: 15rem;
+  height: 2.5rem;
+
+  padding: 0.5rem;
+
+  border: 1px solid var(--border-accent-color);
+  border-radius: 8px 0 0 8px;
+}
+
+.inputBox:focus {
+  outline: none;
+}
+
+.subscribeButton {
+  height: 40px;
+
+  padding: 0 20px;
+
+  background: var(--base-accent-color);
+  border: 1px solid var(--text-accent-color);
+  border-radius: 0 8px 8px 0;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.subscribeButton:active {
+  opacity: 70%;
+}
+
+.icons {
+  display: flex;
+  gap: 12px;
+
+  margin-top: 0.5rem;
+}
+
+.icons a {
+  color: var(--text-accent-color);
+
+  transition: color 0.2s ease;
+}
+
+.icons a[href*="reddit"]:hover {
+  color: #ff4500;
+}
+
+.icons a[href*="x.com"]:hover {
+  color: #24292f;
+}
+
+.icons a[href*="github"]:hover {
+  color: #8250df;
+}

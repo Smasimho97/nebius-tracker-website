@@ -1,0 +1,129 @@
+.mapRowHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  background: rgb(255, 255, 255);
+}
+
+.mapHeader { /* Have default margins/padding*/
+  color: var(--text-header-color);                   /* #142e47*/
+  font-family: var(--font-primary);
+  font-size: 2.25rem;
+  font-style: normal;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  padding: 0;
+}
+
+.mapWindow {
+  border-radius: 32px;                         /* curved corners */
+  overflow: hidden;                            /* clip map to curve */
+  background: rgba(255, 255, 255, 0.75);          /* dark glass */
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  aspect-ratio: 16/9;
+
+  width: 100%;
+  margin: 0 auto;                              /* center inside constructorContainer */
+  padding: 0;
+
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  --status-active: #4ED9A0;
+  --status-upgrade: #93e2fb; /*#8B7CFF*/
+  --status-construction: #D7F063;
+  --status-potential: #ffffff;
+  --nbis-purple: #8c6bca;
+
+}
+
+.legendChart {
+  display: grid;
+
+  color: #ffffff;                  
+  font-size: 10px;
+  font-family: var(--font-primary);
+
+  grid-template-columns: 1.2rem 1fr;
+  grid-template-rows: repeat(4, auto);
+
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+/* Icons */
+.powerIcon {
+  width: .5rem;
+  height: .5rem;
+  border-radius: 4px;
+  border-width: 0.4rem;
+  border-style: ridge;
+}
+
+.activePower {
+  border-color: var(--status-active);
+}
+
+.phasedPower {
+  border-color: var(--status-upgrade);
+  /*#4FA3C7*/
+  /*#C9A84A*/
+}
+
+.constructingPower {
+  border-color: var(--status-construction);
+}
+/*rgba(186, 214, 103, 0.921)*/
+/*rgba(214, 103, 103, 0.921)*/
+
+.potentialPower {
+  border-color: #968aa3; /*#8250df;
+  /*#8A96A3*/
+  /*rgb(198, 198, 198)*/
+}
+
+.connectedPowerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border: 3px ridge #D7F063;
+  border-radius: 12px;
+  background: #1b263b;
+  
+  font-family: var(--font-primary);
+  color: #D7F063;
+
+  width: auto;
+  height: auto;
+
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  padding: .25rem;
+}
+
+.power {
+  font-size: 1.75rem;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.text {
+  font-size: .6rem;
+}
+
+
+
+
+

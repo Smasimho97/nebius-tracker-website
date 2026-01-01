@@ -1,0 +1,83 @@
+:root {
+  /* Design Tokens */
+  --yellow-900: #e0ff4f;
+  --yellow-800: #d7f063;
+
+  --blue-900: #1b263b;
+  --blue-800: #142e47;
+  --blue-700: #304765;
+  --blue-600: #3b567d;
+  --blue-500: #538cfa;
+  --blue-400: #93e2fb;
+
+  --grey-900: #e7ebed;
+  --grey-800: #f3f5f6;
+
+  --green-500: #4ED9A0;
+  --red: #ff4500;
+  --purple: #8250df;
+  --white: white;
+  --black: black;
+
+  /* Semantic Tokens - Text */
+  --text-header-color: var(--blue-800);
+  --text-primary-color: var(--blue-800);
+  --text-secondary-color: var(--yellow-900);
+  --text-accent-color: var(--blue-500);
+
+  /* Semantic Tokens - Surfaces */
+  --base-primary-color: var(--blue-800);
+  --base-primary-hover-color: var(--blue-700);
+  --base-secondary-color: var(--yellow-900);
+  --base-tertiary-color: var(--grey-800);
+  --base-tertiary-hover-color: var(--grey-900);
+  --base-accent-color: var(--blue-500);
+
+  /* Semantic Tokens - Map */
+  --map-base-color: var(--blue-900);
+  --map-land-color: var(--blue-700);
+  --map-land-hover-color: var(--blue-600);
+  --map-border-color: var(--yellow-900);
+
+  /* Semantic Tokens - Status */
+  --status-active: var(--green-500);
+  --status-upgrading: var(--blue-400);
+  --status-constructing: var(--yellow-800);
+  --status-potential: var(--grey-900);
+
+  /* Semantic Tokens - Borders */
+  --border-accent-color: var(--blue-500);
+  --border-divider-color: var(--grey-900);
+
+  /* Typography */
+  --font-primary: "Bruno Ace SC", sans-serif;
+  --font-secondary: "Genos", sans-serif;
+  --font-tertiary: "Inter", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+}
+
+body {
+  margin: 0;
+  ::selection {
+    background-color: #e0ff4f;
+  }
+}
+
+.constructorContainer {
+  width: 100%;
+  max-width: 1440px; /* 1440px */
+  height: auto; /* This is the default but including here for reference */
+  margin: 0 auto; /* 0 margin on all sides does not center the flexConstructorconstructorContainer */
+  padding: 0 2.5rem;
+}
+
+.section {
+  width: 100%;
+  max-width: 1440px;
+  height: 4rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

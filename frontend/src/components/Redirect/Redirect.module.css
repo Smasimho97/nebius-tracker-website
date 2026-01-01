@@ -1,0 +1,80 @@
+.redirectContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 1rem 0;
+
+  border-top: 1.5px solid var(--border-divider-color);
+  border-bottom: 1.5px solid var(--border-divider-color);
+
+  font-family: var(--font-primary);
+}
+
+.redirectCard {
+  all: unset;
+
+  width: 100%;
+  height: 10rem;
+
+  padding: 1rem 1rem 0 1rem;
+
+  border-radius: 5px;
+
+  font-size: 29px;
+  font-weight: 300;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.clustermaxRedirect {
+  background: var(--base-tertiary-color);
+  color: var(--text-primary-color);
+}
+
+.nebiusRedirect {
+  background: var(--base-primary-color);
+  color: var(--text-secondary-color);
+}
+
+.linkContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+}
+
+.nebiusRedirect:hover,
+.clustermaxRedirect:hover {
+  transform: scale(0.98);
+}
+
+.nebiusRedirect:hover {
+  background-color: var(--base-primary-hover-color);
+}
+
+.clustermaxRedirect:hover {
+  background-color: var(--base-tertiary-hover-color);
+}
+
+@media (max-width: 725px) {
+  .redirectContainer {
+    flex-direction: column;
+
+    height: 10rem;
+  }
+
+  .redirectCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1rem 0.5rem;
+
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+}
