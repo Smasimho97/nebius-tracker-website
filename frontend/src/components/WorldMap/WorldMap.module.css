@@ -1,6 +1,6 @@
 .mapHeader {
   margin: 0 auto;
-  padding: 0;
+  padding: 0 0 0.5rem 0;
   width: fit-content;
 
   font-family: var(--font-primary);
@@ -16,8 +16,8 @@
   align-items: center;
   justify-content: space-between;
 
-  width: 9.5rem;
-  height: 3rem;
+  width: 7rem;
+  height: 2.25rem;
   padding: 0 0.5rem;
 
   position: absolute;
@@ -27,12 +27,17 @@
 
   font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
   color: white;
+  opacity: 90%;
 
   background: rgba(44, 63, 90, 0.95);
   border-radius: 12px;
-  border-left: 4px solid #00ffddff;
+  border: 1px solid rgba(255, 255, 255, 0.15);  /* Slightly more opaque border */
+  backdrop-filter: blur(10px);  /* Glass-morphism blur effect */
 
   cursor: pointer;
+
+
+
 }
 
 .activePowerContainer:hover {
@@ -41,11 +46,12 @@
 }
 
 .statusIndicator {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 
   background: #00ffddff;
   border-radius: 50%;
+  box-shadow: 0 0 12px rgba(0, 255, 221, 0.8);  /* Glow effect */
 
   animation: pulse 2s ease-in-out infinite;
 }
@@ -69,15 +75,15 @@
   justify-content: center; }
 
 .activePowerNumber { 
-  font-size: 22px; 
+  font-size: 16px; 
   font-weight: 700; 
   line-height: 1; 
-  
+
   color: #ffffff; 
 }
 
 .activePowerText {
-  font-size: 9px;
+  font-size: 6px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 
@@ -87,6 +93,8 @@
 .infoButton {
   margin: 0;
   padding: 0;
+
+  font-size: .8rem;
 
   background: transparent;
   border: none;

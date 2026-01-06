@@ -19,14 +19,15 @@ export default function MapChart() {
   const height = 720;
 
   const activePower = nebiusSites
-      .filter(site => site.status === "Active")
-      .reduce((sum, site) => sum + site.mw, 0);
+    .filter((site) => site.status === "Active")
+    .reduce((sum, site) => sum + site.activePower, 0);
 
   const status_colors = {
     Active: "#00ffddff",
     Construction: "#f9ff4fff",
     Potential: "#ff4f81ff",
     HQ: "#9359ffff",
+    Satellite: "#9359ffff",
   };
 
   const [activeMarker, setActiveMarker] = useState(null);
@@ -137,7 +138,7 @@ export default function MapChart() {
                   onMouseEnter={() => setActiveMarker(site.city)}
                   onMouseLeave={() => setActiveMarker(null)}
                 >
-                 <g className={markerStyles.markerSvg}>
+                  <g className={markerStyles.markerSvg}>
                   <circle className={markerStyles.core} r=".8" fill={color} cx="0" cy="0" />
                   <circle className={markerStyles.pulse} r=".8" fill={color} cx="0" cy="0" />
                   <circle className={markerStyles.pulse} r=".8" fill={color} cx="0" cy="0" />
@@ -158,58 +159,96 @@ export default function MapChart() {
                       key={`popup-${site.city}`}
                       coordinates={site.coordinates}
                     >
-                      <g transform="translate(4, -7.5)">
-                        <rect
-                          x="0"
-                          y="0"
-                          width="60"
-                          height="30"
-                          rx="2"
-                          fill="#1b263b"
-                          stroke={color}
-                          strokeWidth="0.75"
-                          opacity="0.95"
-                        />
-                        <text
-                          x="30"
-                          y="8"
-                          textAnchor="middle"
-                          fill="#ffffff"
-                          fontSize="5"
-                          fontWeight="bold"
-                          fontFamily="Bruno Ace SC, sans-serif"
-                        >
-                          {site.country == "USA"
-                            ? site.city + ", " + site.state
-                            : site.city}
-                        </text>
-                        <text
-                          x="30"
-                          y="14"
-                          textAnchor="middle"
-                          fill="var(--text-secondary-color)"
-                          fontSize="4"
-                          fontFamily="Arial, sans-serif"
-                        >
-                          {site.mw} MW
-                        </text>
-                        <text
-                          x="30"
-                          y="20"
-                          textAnchor="middle"
+                      {/* Background rectangle */}
+                      <rect
+                        x="5"
+                        y="-10"
+                        width="60"
+                        height="34"
+                        fill="rgba(30, 42, 58, 0.95)"
+                        stroke={color}
+                        strokeWidth="0.5"
+                        rx="2"
+                        ry="2"
+                      />
+
+                      {/* Status dot and text header */}
+                      <g>
+                        <circle
+                          cx="11"
+                          cy="-4.6"
+                          r="1.15"
                           fill={color}
-                          fontSize="3.5"
-                          fontFamily="Arial, sans-serif"
+                          className={markerStyles.statusDot}
+                        />
+
+                        <text
+                          x="14"
+                          y="-3.5"
+                          className={markerStyles.statusText}
+                          fill={color}
+                          stroke={color}
+                          strokeWidth="0.1"
                         >
-                          Status: {site.status}
+                          {site.status.toUpperCase()}
+                        </text>
+                      </g>
+
+                      {/* City name */}
+                      <text x="10" y="3.5" className={markerStyles.popupCity}>
+                        {site.country === "USA"
+                          ? `${site.city}, ${site.state}`
+                          : site.city}
+                      </text>
+
+                      {/* Info rows */}
+                      <g>
+                        {/* Power row */}
+                        <line
+                          x1="10"
+                          y1="6"
+                          x2="60"
+                          y2="6"
+                          stroke="rgba(255, 255, 255, 0.1)"
+                          strokeWidth="0.3"
+                        />
+                        <text x="10" y="11" className={markerStyles.popupLabel}>
+                          {site.type === "Office" ? "CAMPUS" : "POWER"}{" "}
                         </text>
                         <text
-                          x="30"
-                          y="26"
-                          textAnchor="middle"
-                          fill="#aaaaaa"
-                          fontSize="3.5"
-                          fontFamily="Arial, sans-serif"
+                          x="60"
+                          y={site.type === "Office" ? "11" : "11.5"}
+                          className={
+                            site.type === "Office"
+                              ? markerStyles.popupLocationValue
+                              : markerStyles.popupValue
+                          }
+                          textAnchor="end"
+                        >
+                          {site.activePower === "Pending"
+                            ? "Pending"
+                            : site.type === "Office"
+                            ? site.status
+                            : `${site.activePower} MW`}
+                        </text>
+
+                        {/* Location row */}
+                        <line
+                          x1="10"
+                          y1="14"
+                          x2="60"
+                          y2="14"
+                          stroke="rgba(255, 255, 255, 0.1)"
+                          strokeWidth="0.3"
+                        />
+                        <text x="10" y="19" className={markerStyles.popupLabel}>
+                          LOCATION
+                        </text>
+                        <text
+                          x="60"
+                          y="19"
+                          className={markerStyles.popupLocationValue}
+                          textAnchor="end"
                         >
                           {site.country}
                         </text>

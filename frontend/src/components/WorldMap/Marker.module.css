@@ -27,3 +27,63 @@
   0% { transform: scale(1); opacity: 0.8; }
   100% { transform: scale(6); opacity: 0; }
 }
+
+/* Status header */
+.statusHeader {
+}
+
+.statusDot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+.statusText {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 3px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* City name */
+.popupCity {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 4.5px;
+  font-weight: 700;
+  fill: #ffffff;
+}
+
+/* Info row labels */
+.popupLabel {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 2.25px;
+  font-weight: 400;
+  fill: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.3px;
+}
+
+/* Info row values */
+.popupValue {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 4px;
+  font-weight: 700;
+  fill: #e0ff4f;
+}
+
+.popupLocationValue {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 3px;
+  font-weight: 400;
+  fill: #ffffff;
+}
