@@ -1,129 +1,187 @@
-.mapRowHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0;
+.mapHeader {
+  margin: 0 auto;
   padding: 0;
-  background: rgb(255, 255, 255);
-}
+  width: fit-content;
 
-.mapHeader { /* Have default margins/padding*/
-  color: var(--text-header-color);                   /* #142e47*/
   font-family: var(--font-primary);
   font-size: 2.25rem;
   font-style: normal;
   font-weight: 700;
-  margin: 0;
-  margin-bottom: 0.5rem;
-  padding: 0;
+
+  color: var(--text-header-color); /* #142e47 */
 }
 
-.mapWindow {
-  border-radius: 32px;                         /* curved corners */
-  overflow: hidden;                            /* clip map to curve */
-  background: rgba(255, 255, 255, 0.75);          /* dark glass */
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
-  aspect-ratio: 16/9;
-
-  width: 100%;
-  margin: 0 auto;                              /* center inside constructorContainer */
-  padding: 0;
-
+.activePowerContainer {
   display: flex;
-  justify-content: center;
-  position: relative;
-
-  --status-active: #4ED9A0;
-  --status-upgrade: #93e2fb; /*#8B7CFF*/
-  --status-construction: #D7F063;
-  --status-potential: #ffffff;
-  --nbis-purple: #8c6bca;
-
-}
-
-.legendChart {
-  display: grid;
-
-  color: #ffffff;                  
-  font-size: 10px;
-  font-family: var(--font-primary);
-
-  grid-template-columns: 1.2rem 1fr;
-  grid-template-rows: repeat(4, auto);
-
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-}
-
-/* Icons */
-.powerIcon {
-  width: .5rem;
-  height: .5rem;
-  border-radius: 4px;
-  border-width: 0.4rem;
-  border-style: ridge;
-}
-
-.activePower {
-  border-color: var(--status-active);
-}
-
-.phasedPower {
-  border-color: var(--status-upgrade);
-  /*#4FA3C7*/
-  /*#C9A84A*/
-}
-
-.constructingPower {
-  border-color: var(--status-construction);
-}
-/*rgba(186, 214, 103, 0.921)*/
-/*rgba(214, 103, 103, 0.921)*/
-
-.potentialPower {
-  border-color: #968aa3; /*#8250df;
-  /*#8A96A3*/
-  /*rgb(198, 198, 198)*/
-}
-
-.connectedPowerContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
 
-  border: 3px ridge #D7F063;
-  border-radius: 12px;
-  background: #1b263b;
-  
-  font-family: var(--font-primary);
-  color: #D7F063;
-
-  width: auto;
-  height: auto;
+  width: 9.5rem;
+  height: 3rem;
+  padding: 0 0.5rem;
 
   position: absolute;
   top: 1rem;
   right: 1rem;
+  z-index: 10;
 
-  padding: .25rem;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: white;
+
+  background: rgba(44, 63, 90, 0.95);
+  border-radius: 12px;
+  border-left: 4px solid #00ffddff;
+
+  cursor: pointer;
 }
 
-.power {
-  font-size: 1.75rem;
-  font-style: normal;
-  font-weight: 700;
+.activePowerContainer:hover {
+  transform: scale(1.2) translate(-18px, 6px);
+  transition: transform 0.3s ease;
 }
 
-.text {
-  font-size: .6rem;
+.statusIndicator {
+  width: 5px;
+  height: 5px;
+
+  background: #00ffddff;
+  border-radius: 50%;
+
+  animation: pulse 2s ease-in-out infinite;
 }
 
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
 
+.activePowerContent { 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; }
 
+.activePowerNumber { 
+  font-size: 22px; 
+  font-weight: 700; 
+  line-height: 1; 
+  
+  color: #ffffff; 
+}
 
+.activePowerText {
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  opacity: 0.7;
+}
+
+.infoButton {
+  margin: 0;
+  padding: 0;
+
+  background: transparent;
+  border: none;
+  color: #00ffdd;
+
+  cursor: pointer;
+}
+
+.infoButton:hover {
+  opacity: 0.5;
+}
+
+.legendContainer {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+
+  width: 12rem;
+  height: 6rem;
+  padding: 0.25rem 0.5rem;
+
+  position: absolute;
+  top: 5rem;
+  right: 1rem;
+  z-index: 10;
+
+  grid-template-columns: 1.2rem 1fr;
+  grid-template-rows: repeat(4, auto);
+
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 10px;
+
+  background: rgba(44, 63, 90, 0.95);
+  border: 1px solid white;
+  border-radius: 12px;
+}
+
+.powerIcon {
+  width: 0.5rem;
+  height: 0.5rem;
+
+  border-radius: 4px;
+  border-style: ridge;
+  border-width: 0.4rem;
+}
+
+.activePower {
+  border-color: #00ffddff;
+  color: #00ffddff;
+}
+
+.constructingPower {
+  border-color: #e0ff4f;
+  color: #e0ff4f;
+}
+
+.potentialPower {
+  border-color: #ff4f81ff; /* #8250df */
+  color: #ff4f81ff;
+}
+
+.hq {
+  border-color: #9359ffff;
+  color: #9359ffff;
+}
+
+.legendText {
+  display: flex;
+  text-align: center;
+
+  font-weight: 650;
+  color: white;
+}
+
+.mapWindow {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  aspect-ratio: 16 / 9;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 32px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+@media-query {
+}

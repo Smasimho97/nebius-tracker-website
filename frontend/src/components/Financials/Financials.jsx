@@ -1,5 +1,5 @@
 import { BarChart } from "@mui/x-charts/BarChart";
-import { nebiusFinancials } from "../../data/financials.js";
+import {OperatingLeverage, FinancialLeverage} from "./Charts.jsx"
 import styles from "./Financials.module.css";
 
 export default function Financials() {
@@ -10,26 +10,17 @@ export default function Financials() {
   return (
     <div className="constructorContainer">
       <section className="section" />
-      <h2 className={styles.cardHeader}> FINANCIALS </h2>
+      <h2 className={styles.cardGridHeader}> FINANCIALS </h2>
 
       <div className={styles.cardGrid}>
         <div className={styles.card}>
-          <BarChart
-            xAxis={[
-              {
-                id: "barCategories",
-                data: ["bar A", "bar B", "bar C"],
-              },
-            ]}
-            series={[
-              {
-                data: [2, 5, 3],
-              },
-            ]}
-            height={300}
-          />
+          <span className={styles.cardTitle}>Operating Leverage</span>
+          <OperatingLeverage/>
         </div>
-        <div className={styles.card}> </div>
+        <div className={styles.card}>
+          <span className={styles.cardTitle}>Financial Leverage</span>
+          <FinancialLeverage/>
+        </div>
       </div>
     </div>
   );

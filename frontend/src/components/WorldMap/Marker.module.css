@@ -1,0 +1,29 @@
+.markerSvg {
+  /* important for SVG transforms */
+  transform-box: fill-box;
+  transform-origin: center;
+  cursor: pointer;
+}
+
+.core {
+}
+
+.pulse {
+  opacity: 0.8;
+
+  animation-name: pulseAnimate;
+  animation-duration: 4s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+
+/* stagger */
+.pulse:nth-of-type(2) { animation-delay: 0s; }
+.pulse:nth-of-type(3) { animation-delay: 1s; }
+.pulse:nth-of-type(4) { animation-delay: 2s; }
+.pulse:nth-of-type(5) { animation-delay: 3s; }
+
+@keyframes pulseAnimate {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(6); opacity: 0; }
+}
