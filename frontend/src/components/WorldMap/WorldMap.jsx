@@ -190,7 +190,7 @@ export default function MapChart() {
                           stroke={color}
                           strokeWidth="0.1"
                         >
-                          {site.status.toUpperCase()}
+                          {site.type==="Office" ? site.type.toUpperCase() : site.status.toUpperCase()}
                         </text>
                       </g>
 

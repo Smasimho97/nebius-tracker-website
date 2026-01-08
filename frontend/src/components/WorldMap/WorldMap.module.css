@@ -35,9 +35,6 @@
   backdrop-filter: blur(10px);  /* Glass-morphism blur effect */
 
   cursor: pointer;
-
-
-
 }
 
 .activePowerContainer:hover {
@@ -130,6 +127,7 @@
   background: rgba(44, 63, 90, 0.95);
   border: 1px solid white;
   border-radius: 12px;
+  opacity: 70%;
 }
 
 .powerIcon {

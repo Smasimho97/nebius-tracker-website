@@ -1,5 +1,4 @@
-import { BarChart } from "@mui/x-charts/BarChart";
-import {OperatingLeverage, FinancialLeverage} from "./Charts.jsx"
+import {FinancialLeverage, OperatingLeverage} from "./VictoryCharts.jsx"
 import styles from "./Financials.module.css";
 
 export default function Financials() {
@@ -10,16 +9,14 @@ export default function Financials() {
   return (
     <div className="constructorContainer">
       <section className="section" />
-      <h2 className={styles.cardGridHeader}> FINANCIALS </h2>
+      <h2 className={styles.cardGridHeader}>FINANCIALS</h2>
 
       <div className={styles.cardGrid}>
         <div className={styles.card}>
-          <span className={styles.cardTitle}>Operating Leverage</span>
-          <OperatingLeverage/>
+          <FinancialLeverage/>
         </div>
         <div className={styles.card}>
-          <span className={styles.cardTitle}>Financial Leverage</span>
-          <FinancialLeverage/>
+          <OperatingLeverage/>
         </div>
       </div>
     </div>
