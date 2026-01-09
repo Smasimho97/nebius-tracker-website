@@ -1,11 +1,13 @@
 import React from "react";
 import {
+  VictoryGroup,
   VictoryChart,
   VictoryTheme,
   VictoryBar,
   VictoryAxis,
   VictoryLabel,
   VictoryLine,
+  VictoryScatter,
   VictoryTooltip,
   VictoryZoomContainer,
   VictoryContainer,
@@ -20,8 +22,8 @@ import {
 /* For each item in the array, call the following function */
 const NebiusCapitalMetricsCleaned = NebiusCapitalMetrics.map((item) => ({
   reportingQuarter: `${item.quarter} ${item.year}`,
-  total_debt_mm_usd: item.total_debt_mm_usd,
-  total_equity_mm_usd: item.total_equity_mm_usd,
+  total_debt_mm_usd: Number((item.total_debt_mm_usd / 1000).toFixed(2)),
+  total_equity_mm_usd: Number((item.total_equity_mm_usd / 1000).toFixed(2)),
   total_debt_percentage:
     item.total_debt_mm_usd /
     (item.total_debt_mm_usd + item.total_equity_mm_usd),
@@ -39,10 +41,17 @@ const NebiusOperatingMetricsCleaned = NebiusOperatingMetrics.map((item) => ({
   depreciation_amortization_mm_usd: item.depreciation_amortization_mm_usd,
 }));
 
+const symbols = [
+  "circle",
+  "diamond",
+  "square",
+  "triangleUp",
+  "star",
+];
+
 const FinancialLeverage = () => {
   return (
     <VictoryChart
-      domain={{ y: [0, 12000] }}
       domainPadding={40}
       width={700}
       height={400}
@@ -64,7 +73,7 @@ const FinancialLeverage = () => {
           fontSize: 14,
         }}
       />
-      
+
       <VictoryLabel
         text="Debt and equity composition by quarter"
         dx={34}
@@ -88,10 +97,8 @@ const FinancialLeverage = () => {
       <VictoryAxis
         dependentAxis
         label="USD (Billions)"
-        tickFormat={(t) => `${Math.round(t / 1000)}B`}
-        axisLabelComponent={
-          <VictoryLabel dy={-20} dx={0} angle={-90} />
-        }
+        tickFormat={(t) => `${Math.round(t)}B`}
+        axisLabelComponent={<VictoryLabel dy={-20} dx={0} angle={-90} />}
         style={{ tickLabels: { fontSize: 12 } }}
       />
 
@@ -151,7 +158,7 @@ const OperatingLeverage = () => {
         right: 80,
       }}
       theme={VictoryTheme.clean}
-      containerComponent={<VictoryZoomContainer zoomDimension="x" />}
+      containerComponent={<VictoryZoomContainer/>}
     >
       <VictoryLabel
         text="Operating Leverage"
@@ -162,7 +169,7 @@ const OperatingLeverage = () => {
           fontSize: 14,
         }}
       />
-      
+
       <VictoryLabel
         text="Revenue growth relative to operating cost structure by quarter"
         dx={28}
@@ -192,10 +199,19 @@ const OperatingLeverage = () => {
         y={350}
         data={[
           { name: "Revenue", symbol: { fill: "#538cfa", type: "circle" } },
-          { name: "Cost of Revenue", symbol: { fill: "#ff4f81ff", type: "diamond" } },
-          { name: "Product Development", symbol: { fill: "#7C7CF8", type: "square" } },
+          {
+            name: "Cost of Revenue",
+            symbol: { fill: "#ff4f81ff", type: "diamond" },
+          },
+          {
+            name: "Product Development",
+            symbol: { fill: "#7C7CF8", type: "square" },
+          },
           { name: "SG&A", symbol: { fill: "#0D8599", type: "triangleUp" } },
-          { name: "Depreciation & Amortization", symbol: { fill: "#fdc700ff", type: "star" } },
+          {
+            name: "Depreciation & Amortization",
+            symbol: { fill: "#fdc700ff", type: "star" },
+          },
         ]}
         style={{
           label: { fontSize: 7 },
@@ -203,55 +219,123 @@ const OperatingLeverage = () => {
         }}
       />
 
-      <VictoryLine
-        data={NebiusOperatingMetricsCleaned}
-        x="reportingQuarter"
-        y="revenue_mm_usd"
-        interpolation="natural"
-        style={{
-          data: { stroke: "#538cfa", strokeWidth: 2.5 },
-        }}
-      />
+      <VictoryGroup>
+        <VictoryLine
+          data={NebiusOperatingMetricsCleaned}
+          x="reportingQuarter"
+          y="revenue_mm_usd"
+          interpolation="natural"
+          style={{
+            data: { stroke: "#538cfa", strokeWidth: 2.5, opacity: "0.7" },
+          }}
+        />
 
-      <VictoryLine
-        data={NebiusOperatingMetricsCleaned}
-        x="reportingQuarter"
-        y="cost_of_revenue_mm_usd"
-        interpolation="natural"
-        style={{
-          data: { stroke: "#ff4f81ff", strokeWidth: 2.5 },
-        }}
-      />
+        <VictoryLine
+          data={NebiusOperatingMetricsCleaned}
+          x="reportingQuarter"
+          y="cost_of_revenue_mm_usd"
+          interpolation="natural"
+          style={{
+            data: { stroke: "#ff4f81ff", strokeWidth: 2.5, opacity: "0.7"},
+          }}
+        />
 
-      <VictoryLine
-        data={NebiusOperatingMetricsCleaned}
-        x="reportingQuarter"
-        y="product_development_mm_usd"
-        interpolation="natural"
-        style={{
-          data: { stroke: "#7C7CF8", strokeWidth: 2.5 },
-        }}
-      />
+        <VictoryLine
+          data={NebiusOperatingMetricsCleaned}
+          x="reportingQuarter"
+          y="product_development_mm_usd"
+          interpolation="natural"
+          style={{
+            data: { stroke: "#7C7CF8", strokeWidth: 2.5, opacity: "0.7" },
+          }}
+        />
 
-      <VictoryLine
-        data={NebiusOperatingMetricsCleaned}
-        x="reportingQuarter"
-        y="sga_mm_usd"
-        interpolation="natural"
-        style={{
-          data: { stroke: "#fdc700ff", strokeWidth: 2.5 },
-        }}
-      />
+        <VictoryLine
+          data={NebiusOperatingMetricsCleaned}
+          x="reportingQuarter"
+          y="sga_mm_usd"
+          interpolation="natural"
+          style={{
+            data: { stroke: "#0D8599", strokeWidth: 2.5, opacity: "0.7" },
+          }}
+        />
 
-      <VictoryLine
-        data={NebiusOperatingMetricsCleaned}
-        x="reportingQuarter"
-        y="depreciation_amortization_mm_usd"
-        interpolation="natural"
-        style={{
-          data: { stroke: "#fd00f5ff", strokeWidth: 2.5 },
-        }}
-      />
+        <VictoryLine
+          data={NebiusOperatingMetricsCleaned}
+          x="reportingQuarter"
+          y="depreciation_amortization_mm_usd"
+          interpolation="natural"
+          style={{
+            data: { stroke: "#fdc700ff", strokeWidth: 2.5 },
+          }}
+        />
+
+        <VictoryScatter
+          data={NebiusOperatingMetricsCleaned}
+          x="reportingQuarter"
+          y="revenue_mm_usd"
+          interpolation="natural"
+          symbol={"circle"}
+          size={2.5}
+          labelComponent={<VictoryTooltip />}
+          style={{
+            data: { stroke: "#538cfa", strokeWidth: 2.5 , fill:"#538cfa" , opacity:"0.75"},
+          }}
+        />
+
+        <VictoryScatter
+          data={NebiusOperatingMetricsCleaned}
+          x="reportingQuarter"
+          y="cost_of_revenue_mm_usd"
+          interpolation="natural"
+          symbol={"diamond"}
+          size={2.5}
+          labelComponent={<VictoryTooltip />}
+          style={{
+            data: { stroke: "#ff4f81ff", strokeWidth: 2.5 , fill:"#ff4f81ff" , opacity:"0.75" },
+          }}
+        />
+
+        <VictoryScatter
+          data={NebiusOperatingMetricsCleaned}
+          x="reportingQuarter"
+          y="product_development_mm_usd"
+          interpolation="natural"
+          symbol={"square"}
+          size={2.5}
+          labelComponent={<VictoryTooltip />}
+          style={{
+            data: { stroke: "#7C7CF8", strokeWidth: 2.5 , fill:"#7C7CF8" , opacity:"0.75" },
+          }}
+        />
+
+        <VictoryScatter
+          data={NebiusOperatingMetricsCleaned}
+          x="reportingQuarter"
+          y="sga_mm_usd"
+          interpolation="natural"
+          symbol={"triangleUp"}
+          size={2.5}
+          labelComponent={<VictoryTooltip />}
+          style={{
+            data: { stroke: "#0D8599", strokeWidth: 2.5 , fill:"#0D8599" , opacity:"0.75" },
+          }}
+        />
+
+        <VictoryScatter
+          data={NebiusOperatingMetricsCleaned}
+          x="reportingQuarter"
+          y="depreciation_amortization_mm_usd"
+          interpolation="natural"
+          symbol={"star"}
+          size={2.5}
+          labelComponent={<VictoryTooltip />}
+          style={{
+            data: { stroke: "#fdc700ff", strokeWidth: 2.5 , fill:"#fdc700ff" , opacity:"0.75" },
+          }}
+        />
+
+      </VictoryGroup>
     </VictoryChart>
   );
 };

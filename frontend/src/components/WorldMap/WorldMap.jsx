@@ -22,6 +22,26 @@ export default function MapChart() {
     .filter((site) => site.status === "Active")
     .reduce((sum, site) => sum + site.activePower, 0);
 
+  const targetPower = nebiusSites
+    .filter((site) => site.targetPower != null)
+    .reduce((sum, site) => sum + site.targetPower, 0);
+
+  const activeSites = nebiusSites.reduce(
+    (count, site) => (site.status === "Active" ? count + 1 : count),
+    0
+  );
+
+  const constructingSites = nebiusSites.reduce(
+    (count, site) => (site.status === "Constructing" ? count + 1 : count),
+    0
+  );
+
+  const potentialSites = nebiusSites.reduce(
+    (count, site) => (site.status === "Potential" ? count + 1 : count),
+    0
+  );
+
+
   const status_colors = {
     Active: "#00ffddff",
     Construction: "#f9ff4fff",
@@ -190,7 +210,9 @@ export default function MapChart() {
                           stroke={color}
                           strokeWidth="0.1"
                         >
-                          {site.type==="Office" ? site.type.toUpperCase() : site.status.toUpperCase()}
+                          {site.type === "Office"
+                            ? site.type.toUpperCase()
+                            : site.status.toUpperCase()}
                         </text>
                       </g>
 
@@ -260,8 +282,11 @@ export default function MapChart() {
         </ComposableMap>
 
         {/* Active Power Badge */}
+        {activeInfo === null && (
         <div className={styles.activePowerContainer}>
-          <div className={styles.statusIndicator}></div>
+          <div
+            className={`${styles.statusIndicator} ${styles.activePowerIcon}`}
+          ></div>
           <div className={styles.activePowerContent}>
             <span className={styles.activePowerNumber}> {activePower} MW </span>
             <span className={styles.activePowerText}> Active Power </span>
@@ -273,25 +298,67 @@ export default function MapChart() {
             ⓘ
           </button>
         </div>
+        )}
 
-        {/* Legend Dropdown */}
+        {/* Conditional Legend Overlay */}
+
         {activeInfo && (
-          <div className={styles.legendContainer}>
-            <div className={`${styles.powerIcon} ${styles.activePower}`}> </div>
-            <span className={styles.legendText}>Active</span>
+          <div className={styles.statusOverlay}>
+            <div className={styles.legendContainer}>
+              <div className={styles.legendItemContainer}>
+                <div
+                  className={`${styles.statusIndicator} ${styles.activePowerIcon}`}
+                ></div>
+                <div className={styles.legendItemContent}>
+                  <div className={styles.legendItemKey}> Active </div>
+                  <div className={styles.legendItemAttributes}>
+                    {" "}
+                    {activeSites} Sites • {activePower} MW
+                  </div>
+                </div>
 
-            <div className={`${styles.powerIcon} ${styles.constructingPower}`}>
-              {" "}
+                <div className={styles.legendItemContainer}>
+                  <div
+                    className={`${styles.statusIndicator} ${styles.constructingPowerIcon}`}
+                  ></div>
+                  <div className={styles.legendItemContent}>
+                    <div className={styles.legendItemKey}> Construction </div>
+                    <div className={styles.legendItemAttributes}>
+                      {" "}
+                      {constructingSites} sites{" "}
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.legendItemContainer}>
+                  <div
+                    className={`${styles.statusIndicator} ${styles.potentialPowerIcon}`}
+                  ></div>
+                  <div className={styles.legendItemContent}>
+                    <div className={styles.legendItemKey}> Potential </div>
+                    <div className={styles.legendItemAttributes}>
+                      {" "}
+                      {potentialSites} sites{" "}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <span className={styles.legendText}>Constructing</span>
 
-            <div className={`${styles.powerIcon} ${styles.potentialPower}`}>
-              {" "}
+            <div className={styles.totalPipelineContainer}>
+              <div className={styles.totalPipelineKey}> {targetPower} MW </div>
+              <div className={styles.totalPipelineAttributes}>
+                Total Pipeline
+              </div>
             </div>
-            <span className={styles.legendText}>Potential</span>
 
-            <div className={`${styles.powerIcon} ${styles.hq}`}> </div>
-            <span className={styles.legendText}>HQ</span>
+           <button 
+  className={styles.exitButton}
+  onClick={() => setActiveInfo(null)}
+  aria-label="Close legend"
+>
+  ×
+</button>
           </div>
         )}
       </div>

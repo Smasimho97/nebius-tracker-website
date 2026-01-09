@@ -11,13 +11,35 @@
   color: var(--text-header-color); /* #142e47 */
 }
 
+.mapWindow {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  aspect-ratio: 16 / 9;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 32px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+}
+
 .activePowerContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  width: 7rem;
-  height: 2.25rem;
+  width: 7.5rem;
+  height: 2.5rem;
   padding: 0 0.5rem;
 
   position: absolute;
@@ -27,12 +49,11 @@
 
   font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
   color: white;
-  opacity: 90%;
 
-  background: rgba(44, 63, 90, 0.95);
+  background: rgba(44, 63, 90, 0.5);
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.15);  /* Slightly more opaque border */
-  backdrop-filter: blur(10px);  /* Glass-morphism blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.25); /* Slightly more opaque border */
+  backdrop-filter: blur(12px) saturate(180%); /* Glass-morphism blur effect */
 
   cursor: pointer;
 }
@@ -46,9 +67,7 @@
   width: 6px;
   height: 6px;
 
-  background: #00ffddff;
   border-radius: 50%;
-  box-shadow: 0 0 12px rgba(0, 255, 221, 0.8);  /* Glow effect */
 
   animation: pulse 2s ease-in-out infinite;
 }
@@ -66,17 +85,38 @@
   }
 }
 
-.activePowerContent { 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: center; }
+.activePowerIcon {
+  background: rgba(0, 255, 221, 1);
+  box-shadow: 0 0 12px rgba(0, 255, 221, 0.8);
+}
 
-.activePowerNumber { 
-  font-size: 16px; 
-  font-weight: 700; 
-  line-height: 1; 
+.constructingPowerIcon {
+  background: rgba(224, 255, 79, 1);
+  box-shadow: 0 0 12px rgba(224, 255, 79, 0.8);
+}
 
-  color: #ffffff; 
+.potentialPowerIcon {
+  background: rgba(255, 79, 129, 1);
+  box-shadow: 0 0 12px rgba(255, 79, 129, 0.8);
+}
+
+.officeIcon {
+  background: rgba(147, 89, 255, 1);
+  box-shadow: 0 0 12px rgba(147, 89, 255, 0.8);
+}
+
+.activePowerContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.activePowerNumber {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+
+  color: #ffffff;
 }
 
 .activePowerText {
@@ -91,7 +131,7 @@
   margin: 0;
   padding: 0;
 
-  font-size: .8rem;
+  font-size: 0.8rem;
 
   background: transparent;
   border: none;
@@ -104,89 +144,129 @@
   opacity: 0.5;
 }
 
+/* Legend Overlay */
+
+.statusOverlay {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  position: absolute;
+  z-index: 10;
+  top: 1rem;
+  width: 32.5rem;
+  height: 4rem;
+  padding: 1rem 2.25rem 1rem 2.25rem;
+
+  background: rgba(44, 63, 90, 0.5);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25); /* Slightly more opaque border */
+  backdrop-filter: blur(12px) saturate(180%); /* Glass-morphism blur effect */
+}
+
+.statusOverlay:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
 .legendContainer {
-  display: grid;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.legendItemContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: .85rem;
+}
+
+.legendItemContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.15rem;
+  color: white;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+.legendItemKey {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.legendItemAttributes {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 7px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  opacity: 0.7;
+}
+
+.totalPipelineContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.2rem;
+  color: white;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+.totalPipelineKey {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+
+  color: #ffffff;
+}
+
+.totalPipelineAttributes {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  opacity: 0.7;
+}
+
+.exitButton {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+
+  width: 14px;
+  height: 14px;
+  padding: 0;
+
+  display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 12rem;
-  height: 6rem;
-  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
 
-  position: absolute;
-  top: 5rem;
-  right: 1rem;
-  z-index: 10;
-
-  grid-template-columns: 1.2rem 1fr;
-  grid-template-rows: repeat(4, auto);
-
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
   font-size: 10px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
 
-  background: rgba(44, 63, 90, 0.95);
-  border: 1px solid white;
-  border-radius: 12px;
-  opacity: 70%;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.powerIcon {
-  width: 0.5rem;
-  height: 0.5rem;
-
-  border-radius: 4px;
-  border-style: ridge;
-  border-width: 0.4rem;
-}
-
-.activePower {
-  border-color: #00ffddff;
-  color: #00ffddff;
-}
-
-.constructingPower {
-  border-color: #e0ff4f;
-  color: #e0ff4f;
-}
-
-.potentialPower {
-  border-color: #ff4f81ff; /* #8250df */
-  color: #ff4f81ff;
-}
-
-.hq {
-  border-color: #9359ffff;
-  color: #9359ffff;
-}
-
-.legendText {
-  display: flex;
-  text-align: center;
-
-  font-weight: 650;
-  color: white;
-}
-
-.mapWindow {
-  display: flex;
-  justify-content: center;
-
-  width: 100%;
-  margin: 0 auto;
-  padding: 0;
-  aspect-ratio: 16 / 9;
-
-  position: relative;
-
-  overflow: hidden;
-
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 32px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
-
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+.exitButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 1);
+  transform: scale(1.05);
 }
 
 @media-query {
