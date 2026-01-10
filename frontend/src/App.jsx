@@ -1,21 +1,18 @@
-//import { useState } from 'react'
-import SiteHeader from "./components/SiteHeader/SiteHeader.jsx";
-import Financials from "./components/Financials/Financials.jsx";
-import WorldMap from "./components/WorldMap/WorldMap.jsx";
-import Redirect from "./components/Redirect/Redirect.jsx";
-import Footer from "./components/Footer/Footer.jsx";
-
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import LandingPage from "./pages/LandingPage.jsx";
+import DatacenterPage from "./pages/DatacenterPage.jsx";
+import KnowledgePage from "./pages/KnowledgePage.jsx";
 import "./App.css";
 
 function App() {
   return (
-    <>
-      <SiteHeader />
-      <WorldMap />
-      <Financials />
-      <Redirect />
-      <Footer />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/datacenter" element={<DatacenterPage />} />
+        <Route path="/knowledge" element={<KnowledgePage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
