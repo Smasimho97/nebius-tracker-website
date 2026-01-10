@@ -15,7 +15,7 @@
 
   --green-500: #4ED9A0;
   --red: #ff4500;
-  --purple: #6366F1;
+  --purple: #5b6ef5;
   --white: white;
   --black: black;
 
@@ -55,6 +55,10 @@
   --font-tertiary: "Inter", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 }
 
+html {
+    overscroll-behavior: none;
+}
+
 body {
   margin: 0;
   ::selection {
@@ -64,7 +68,7 @@ body {
 
 .constructorContainer {
   width: 100%;
-  max-width: 1440px; /* 1440px */
+  max-width: 1400px; /* 1440px */
   height: auto; /* This is the default but including here for reference */
   margin: 0 auto; /* 0 margin on all sides does not center the flexConstructorconstructorContainer */
   padding: 0 2.5rem;
@@ -73,7 +77,7 @@ body {
 .section {
   width: 100%;
   max-width: 1440px;
-  height: 4rem;
+  height: 5.5rem;
 }
 
 *,
@@ -81,3 +85,5 @@ body {
 *::after {
   box-sizing: border-box;
 }
+
+

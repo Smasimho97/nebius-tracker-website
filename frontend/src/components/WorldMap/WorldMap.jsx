@@ -41,7 +41,6 @@ export default function MapChart() {
     0
   );
 
-
   const status_colors = {
     Active: "#00ffddff",
     Construction: "#f9ff4fff",
@@ -84,7 +83,7 @@ export default function MapChart() {
             center={[11, 44]} // [lon, lat] — center on initial render
             zoom={1.0} // initial zoom level
             minZoom={0.9} // optional: don't let user zoom too far out
-            maxZoom={6} // optional: don't let user zoom too far in
+            maxZoom={15} // optional: don't let user zoom too far in
           >
             <Geographies geography={worldGeoUrl}>
               {({ geographies }) =>
@@ -159,12 +158,42 @@ export default function MapChart() {
                   onMouseLeave={() => setActiveMarker(null)}
                 >
                   <g className={markerStyles.markerSvg}>
-                  <circle className={markerStyles.core} r=".8" fill={color} cx="0" cy="0" />
-                  <circle className={markerStyles.pulse} r=".8" fill={color} cx="0" cy="0" />
-                  <circle className={markerStyles.pulse} r=".8" fill={color} cx="0" cy="0" />
-                  <circle className={markerStyles.pulse} r=".8" fill={color} cx="0" cy="0" />
-                  <circle className={markerStyles.pulse} r=".8" fill={color} cx="0" cy="0" />
-                </g>
+                    <circle
+                      className={markerStyles.core}
+                      r=".8"
+                      fill={color}
+                      cx="0"
+                      cy="0"
+                    />
+                    <circle
+                      className={markerStyles.pulse}
+                      r=".8"
+                      fill={color}
+                      cx="0"
+                      cy="0"
+                    />
+                    <circle
+                      className={markerStyles.pulse}
+                      r=".8"
+                      fill={color}
+                      cx="0"
+                      cy="0"
+                    />
+                    <circle
+                      className={markerStyles.pulse}
+                      r=".8"
+                      fill={color}
+                      cx="0"
+                      cy="0"
+                    />
+                    <circle
+                      className={markerStyles.pulse}
+                      r=".8"
+                      fill={color}
+                      cx="0"
+                      cy="0"
+                    />
+                  </g>
                 </Marker>
               );
             })}
@@ -283,21 +312,24 @@ export default function MapChart() {
 
         {/* Active Power Badge */}
         {activeInfo === null && (
-        <div className={styles.activePowerContainer}>
-          <div
-            className={`${styles.statusIndicator} ${styles.activePowerIcon}`}
-          ></div>
-          <div className={styles.activePowerContent}>
-            <span className={styles.activePowerNumber}> {activePower} MW </span>
-            <span className={styles.activePowerText}> Active Power </span>
+          <div className={styles.activePowerContainer}>
+            <div
+              className={`${styles.statusIndicator} ${styles.activePowerIcon}`}
+            ></div>
+            <div className={styles.activePowerContent}>
+              <span className={styles.activePowerNumber}>
+                {" "}
+                {activePower} MW{" "}
+              </span>
+              <span className={styles.activePowerText}> Active Power </span>
+            </div>
+            <button
+              className={styles.infoButton}
+              onClick={() => setActiveInfo((prev) => !prev)}
+            >
+              ⓘ
+            </button>
           </div>
-          <button
-            className={styles.infoButton}
-            onClick={() => setActiveInfo((prev) => !prev)}
-          >
-            ⓘ
-          </button>
-        </div>
         )}
 
         {/* Conditional Legend Overlay */}
@@ -352,13 +384,13 @@ export default function MapChart() {
               </div>
             </div>
 
-           <button 
-  className={styles.exitButton}
-  onClick={() => setActiveInfo(null)}
-  aria-label="Close legend"
->
-  ×
-</button>
+            <button
+              className={styles.exitButton}
+              onClick={() => setActiveInfo(null)}
+              aria-label="Close legend"
+            >
+              ×
+            </button>
           </div>
         )}
       </div>

@@ -3,10 +3,12 @@ import styles from "./SiteHeader.module.css";
 import logo from "../../assets/nbis-white.svg";
 import hamburger from "../../assets/hamburger.svg";
 import chevron from "../../assets/chevron.svg";
+import ContactForm from "../Contact/Contact.jsx";
 
 export default function SiteHeader() {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const closeForm = () => setIsContactOpen((prev)=>(!prev));
 
   return (
     <>
@@ -38,7 +40,7 @@ export default function SiteHeader() {
         </nav>
 
         {/* Contact Form */}
-        {isContactOpen && <></>}
+        {isContactOpen && <ContactForm onClose={closeForm}/>}
 
         {/* Mobile Nav Toggle */}
         <button

@@ -1,32 +1,13 @@
-.footer {
+.footerBackground {
+  background: linear-gradient(to bottom, rgba(248, 251, 255, 0), #f8fbff);
+  border-bottom: 1px solid black;
+}
+
+.footerContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-}
-
-.disclaimerContainer {
-  width: 50%;
-
-  padding-right: 4rem;
-}
-
-.disclaimerHeader {
-  margin: 0;
-  padding: 0;
-
-  font-family: var(--font-tertiary);
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 40px;
-  color: var(--text-header-color);
-}
-
-.disclaimerBody {
-  margin-top: 0.5rem;
-
-  font-family: var(--font-tertiary);
-  font-size: 14px;
-  line-height: 24px;
-  color: var(--text-primary-color);
+  align-items: center;
 }
 
 .subscribeContainer {
@@ -34,28 +15,27 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  width: 100%;
+
+  padding-bottom: 2.5rem;
+  border-bottom: 1.5px solid var(--border-divider-color);
 }
 
 .sideBySideWrap {
   display: flex;
-
   margin: 0.75rem;
 }
 
 .callToAction {
-  margin: 0;
-  padding: 0;
-
   font-family: var(--font-tertiary);
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 600;
-  line-height: 40px;
   color: var(--purple);
-  text-decoration: underline;
 }
 
 .inputBox {
-  width: 15rem;
+  width: 20rem;
   height: 2.5rem;
 
   padding: 0.5rem;
@@ -111,5 +91,13 @@
 }
 
 .icons a[href*="github"]:hover {
-  color: #0969DA;
+  color: #0969da;
+}
+
+.disclaimer {
+  margin: 1.25rem 0 1.25rem 0;
+
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12.5px;
+  color: #6b7280;
 }

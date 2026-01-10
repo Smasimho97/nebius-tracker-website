@@ -205,14 +205,15 @@ const OperatingLeverage = () => {
           },
           {
             name: "Product Development",
-            symbol: { fill: "#7C7CF8", type: "square" },
+            symbol: { fill: "#14b8a6", type: "square" },
           },
-          { name: "SG&A", symbol: { fill: "#0D8599", type: "triangleUp" } },
+          { name: "SG&A", symbol: { fill: "#001eff57", type: "triangleUp" } },
           {
             name: "Depreciation & Amortization",
-            symbol: { fill: "#fdc700ff", type: "star" },
+            symbol: { fill: "#d0e3fcff", type: "star" },
           },
         ]}
+
         style={{
           label: { fontSize: 7 },
           border: { stroke: "transparent" },
@@ -246,7 +247,7 @@ const OperatingLeverage = () => {
           y="product_development_mm_usd"
           interpolation="natural"
           style={{
-            data: { stroke: "#7C7CF8", strokeWidth: 2.5, opacity: "0.7" },
+            data: { stroke: "#14b8a6", strokeWidth: 2.5, opacity: "0.5" },
           }}
         />
 
@@ -256,8 +257,8 @@ const OperatingLeverage = () => {
           y="sga_mm_usd"
           interpolation="natural"
           style={{
-            data: { stroke: "#0D8599", strokeWidth: 2.5, opacity: "0.7" },
-          }}
+            data: { stroke: "#3b567d", strokeWidth: 2.5, opacity: ".35" },
+          }} /*{ stroke: "#001effff", strokeWidth: 2.5, opacity: "0.3" },*/
         />
 
         <VictoryLine
@@ -266,72 +267,7 @@ const OperatingLeverage = () => {
           y="depreciation_amortization_mm_usd"
           interpolation="natural"
           style={{
-            data: { stroke: "#fdc700ff", strokeWidth: 2.5 },
-          }}
-        />
-
-        <VictoryScatter
-          data={NebiusOperatingMetricsCleaned}
-          x="reportingQuarter"
-          y="revenue_mm_usd"
-          interpolation="natural"
-          symbol={"circle"}
-          size={2.5}
-          labelComponent={<VictoryTooltip />}
-          style={{
-            data: { stroke: "#538cfa", strokeWidth: 2.5 , fill:"#538cfa" , opacity:"0.75"},
-          }}
-        />
-
-        <VictoryScatter
-          data={NebiusOperatingMetricsCleaned}
-          x="reportingQuarter"
-          y="cost_of_revenue_mm_usd"
-          interpolation="natural"
-          symbol={"diamond"}
-          size={2.5}
-          labelComponent={<VictoryTooltip />}
-          style={{
-            data: { stroke: "#ff4f81ff", strokeWidth: 2.5 , fill:"#ff4f81ff" , opacity:"0.75" },
-          }}
-        />
-
-        <VictoryScatter
-          data={NebiusOperatingMetricsCleaned}
-          x="reportingQuarter"
-          y="product_development_mm_usd"
-          interpolation="natural"
-          symbol={"square"}
-          size={2.5}
-          labelComponent={<VictoryTooltip />}
-          style={{
-            data: { stroke: "#7C7CF8", strokeWidth: 2.5 , fill:"#7C7CF8" , opacity:"0.75" },
-          }}
-        />
-
-        <VictoryScatter
-          data={NebiusOperatingMetricsCleaned}
-          x="reportingQuarter"
-          y="sga_mm_usd"
-          interpolation="natural"
-          symbol={"triangleUp"}
-          size={2.5}
-          labelComponent={<VictoryTooltip />}
-          style={{
-            data: { stroke: "#0D8599", strokeWidth: 2.5 , fill:"#0D8599" , opacity:"0.75" },
-          }}
-        />
-
-        <VictoryScatter
-          data={NebiusOperatingMetricsCleaned}
-          x="reportingQuarter"
-          y="depreciation_amortization_mm_usd"
-          interpolation="natural"
-          symbol={"star"}
-          size={2.5}
-          labelComponent={<VictoryTooltip />}
-          style={{
-            data: { stroke: "#fdc700ff", strokeWidth: 2.5 , fill:"#fdc700ff" , opacity:"0.75" },
+            data: { stroke: "#c4ddfdff", strokeWidth: 2.5, opacity: "1" },
           }}
         />
 
