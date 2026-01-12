@@ -1,0 +1,26 @@
+.yearSelectorContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 15rem;
+}
+
+.yearText {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    text-decoration-line: underline;
+    color: black;
+}
+
+.timelineCard {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    padding: .5rem;
+    width: 20rem;
+    height: 8rem;
+    border: 1px solid rgba(219, 219, 219, 0.5);
+    border-left: 5px solid rgba(0, 255, 174, 0.395);
+    border-radius: 12px;
+    box-shadow: 2px 2px 15px rgba(0, 255, 174, 0.395);
+
+}

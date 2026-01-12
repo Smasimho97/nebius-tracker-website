@@ -1,11 +1,15 @@
-import {FinancialLeverage, OperatingLeverage} from "./VictoryCharts.jsx"
+import { useState } from "react";
+import {
+  FinancialLeverage,
+  FinancialLeveragePercentage,
+  OperatingLeverage,
+} from "./VictoryCharts.jsx";
 import styles from "./Financials.module.css";
 
 export default function Financials() {
-  /* Financials we care about 
-  1) Outstanding Debt / Dilution / Financing
-  2) Operating Leverage
-  3) Core Business Margins (EBITDA/EBIT)*/
+  const [isFinancialsUnitToggle, setFinancialsUnitToggle] = useState(false);
+  const [isOperatingUnitToggle, setOperatingUnitToggle] = useState(false);
+
   return (
     <div className="constructorContainer">
       <section className="section" />
@@ -13,10 +17,24 @@ export default function Financials() {
 
       <div className={styles.cardGrid}>
         <div className={styles.card}>
-          <FinancialLeverage/>
+          {!isFinancialsUnitToggle && <FinancialLeverage />}
+          {isFinancialsUnitToggle && <FinancialLeveragePercentage />}
+
+          <div className={styles.unitToggleContainer}>
+            <span className={styles.unitToggleBarText}> $ </span>
+            <div className={styles.unitToggleBar}>
+              <button
+                className={`${styles.unitToggleButton} ${
+                  isFinancialsUnitToggle ? styles.toggled : ""
+                }`}
+                onClick={() => setFinancialsUnitToggle((prev) => !prev)}
+              ></button>
+            </div>
+            <span className={styles.unitToggleBarText}> % </span>
+          </div>
         </div>
         <div className={styles.card}>
-          <OperatingLeverage/>
+          <OperatingLeverage />
         </div>
       </div>
     </div>

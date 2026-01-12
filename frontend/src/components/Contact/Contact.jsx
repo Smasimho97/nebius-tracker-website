@@ -31,7 +31,7 @@ export default function ContactForm({ onClose }) {
         <div className={styles.feedbackInputContainer}>
           <div className={styles.contactFormCategory}> Feedback </div>
           <textarea
-            placeholder="Share your thoughts! Please limit your feedback to 500 characters."
+            placeholder="Please limit feedback to 500 characters"
             maxLength={500}
             rows={7}
             className={styles.feedbackInput}
