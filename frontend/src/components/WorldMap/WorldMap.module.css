@@ -1,108 +1,50 @@
-.mapHeader {
-  margin: 0 auto;
-  padding: 0 0 0.75rem 0;
-  width: fit-content;
-
-  font-family: var(--font-primary);
-  font-size: 2.25rem;
-  font-style: normal;
-  font-weight: 700;
-
-  color: var(--text-header-color); /* #142e47 */
-}
-
-.mapWindow {
-  display: flex;
-  justify-content: center;
-
-  width: 100%;
-  margin: 0 auto;
-  padding: 0;
-  aspect-ratio: 16 / 9;
-
-  position: relative;
-
-  overflow: hidden;
-
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 32px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
-
-  backdrop-filter: blur(12px) saturate(150%);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
-}
-
-.activePowerContainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  width: 7.5rem;
-  height: 2.5rem;
-  padding: 0 0.5rem;
-
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 10;
-
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-  color: white;
-
-  background: rgba(44, 63, 90, 0.5);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.25); /* Slightly more opaque border */
-  backdrop-filter: blur(12px) saturate(180%); /* Glass-morphism blur effect */
-
-  cursor: pointer;
-}
-
-.activePowerContainer:hover {
-  transform: scale(1.2) translate(-18px, 6px);
-  transition: transform 0.3s ease;
-}
-
-.statusIndicator {
-  width: 6px;
-  height: 6px;
-
-  border-radius: 50%;
-
-  animation: pulse 2s ease-in-out infinite;
+@keyframes mapEntrance {
+  0%   { filter: blur(6px); opacity: 0.25; }
+  100% { filter: blur(0px); opacity: 1; }
 }
 
 @keyframes pulse {
-  0%,
-  100% {
+  0%, 100% {
     opacity: 1;
     transform: scale(1);
   }
-
   50% {
     opacity: 0.6;
     transform: scale(1.2);
   }
 }
 
-.activePowerIcon {
-  background: rgba(0, 255, 221, 1);
-  box-shadow: 0 0 12px rgba(0, 255, 221, 0.8);
+.mapWindow {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+  animation: mapEntrance 5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.constructingPowerIcon {
-  background: rgba(224, 255, 79, 1);
-  box-shadow: 0 0 12px rgba(224, 255, 79, 0.8);
-}
-
-.potentialPowerIcon {
-  background: rgba(255, 79, 129, 1);
-  box-shadow: 0 0 12px rgba(255, 79, 129, 0.8);
-}
-
-.officeIcon {
-  background: rgba(147, 89, 255, 1);
-  box-shadow: 0 0 12px rgba(147, 89, 255, 0.8);
+.activePowerContainer {
+  position: absolute;
+  top: 3rem;
+  right: 1rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 7.5rem;
+  height: 2.5rem;
+  padding: 0 0.5rem;
+  background: rgba(44, 63, 90, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  backdrop-filter: blur(12px) saturate(180%);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: white;
+  cursor: pointer;
 }
 
 .activePowerContent {
@@ -115,7 +57,6 @@
   font-size: 16px;
   font-weight: 700;
   line-height: 1;
-
   color: #ffffff;
 }
 
@@ -123,143 +64,144 @@
   font-size: 6px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-
   opacity: 0.7;
 }
 
 .infoButton {
-  margin: 0;
   padding: 0;
-
-  font-size: 0.8rem;
-
+  margin: 0;
   background: transparent;
   border: none;
+  font-size: 0.8rem;
   color: #00ffdd;
-
   cursor: pointer;
 }
 
-.infoButton:hover {
-  opacity: 0.5;
+.infoButton:hover { opacity: 0.5; }
+
+.statusIndicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
 }
 
-/* Legend Overlay */
+.activePowerIcon      { background: rgba(0, 255, 221, 1);   box-shadow: 0 0 12px rgba(0, 255, 221, 0.8); }
+.constructingPowerIcon { background: rgba(250, 204, 21, 1); box-shadow: 0 0 12px rgba(250, 204, 21, 0.8); }
+.announcedPowerIcon   { background: #a8d8ff;                box-shadow: 0 0 12px rgba(107, 158, 255, 0.8); }
+.builtPowerIcon       { background: rgb(224, 255, 79);      box-shadow: 0 0 12px rgba(224, 255, 79, 0.8); }
+.colocationPowerIcon  { background: rgb(251, 113, 133);     box-shadow: 0 0 12px rgba(251, 113, 133, 0.8); }
+.ownedPowerIcon       { background: rgb(52, 211, 153);      box-shadow: 0 0 12px rgba(52, 211, 153, 0.8); }
 
-.statusOverlay {
+/* map overlay */
+.mapOverlay {
+  position: absolute;
+  top: 3rem;
+  right: 1rem;
+  z-index: 400;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-
-  position: absolute;
-  z-index: 10;
-  top: 1rem;
-  width: 32.5rem;
-  height: 4rem;
-  padding: 1rem 2.25rem 1rem 2.25rem;
-
-  background: rgba(44, 63, 90, 0.5);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.25); /* Slightly more opaque border */
-  backdrop-filter: blur(12px) saturate(180%); /* Glass-morphism blur effect */
-}
-
-.statusOverlay:hover {
-  transform: scale(1.1);
-  transition: transform 0.3s ease;
-  cursor: pointer;
+  width: 10rem;
+  height: 12rem;
+  padding: 1rem;
+  background: rgba(44, 63, 90, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  backdrop-filter: blur(12px) saturate(180%);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: white;
 }
 
 .legendContainer {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  height: auto;
 }
 
 .legendItemContainer {
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  gap: .85rem;
+  gap: 0.85rem;
 }
 
 .legendItemContent {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
   gap: 0.15rem;
-  color: white;
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
 }
 
 .legendItemKey {
-  font-size: 9px;
+  font-size: 10.5px;
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
 .legendItemAttributes {
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-  font-size: 7px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-
-  opacity: 0.7;
-}
-
-.totalPipelineContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 0.2rem;
-  color: white;
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-}
-
-.totalPipelineKey {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1;
-
-  color: #ffffff;
-}
-
-.totalPipelineAttributes {
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
   font-size: 8px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-
   opacity: 0.7;
 }
 
+.divider {
+  width: 100%;
+  height: 1px;
+  margin-top: 0.5rem;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* toggle */
+.toggleSlash {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  padding: 0.5rem 0;
+  font-family: inherit;
+  font-size: 9.5px;
+  font-weight: 400;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.toggleSlashOpt {
+  color: rgba(255, 255, 255, 0.2);
+  transition: color 0.2s;
+}
+
+.toggleSlashOpt.active { color: rgba(255, 255, 255, 0.75); }
+
+.toggleSlashSep {
+  color: rgba(255, 255, 255, 0.1);
+}
+
+/* exit button */
 .exitButton {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-
-  width: 14px;
-  height: 14px;
-  padding: 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
+  width: 14px;
+  height: 14px;
+  padding: 0;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   backdrop-filter: blur(8px);
-
   font-size: 10px;
   font-weight: 300;
   color: rgba(255, 255, 255, 0.7);
-
-  cursor: pointer;
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .exitButton:hover {
@@ -267,7 +209,4 @@
   border-color: rgba(255, 255, 255, 0.4);
   color: rgba(255, 255, 255, 1);
   transform: scale(1.05);
-}
-
-@media-query {
 }

@@ -10,6 +10,7 @@ import {
   VictoryScatter,
   VictoryTooltip,
   VictoryZoomContainer,
+  VictoryVoronoiContainer,
   VictoryContainer,
   VictoryLegend,
   VictoryStack,
@@ -39,6 +40,13 @@ const NebiusOperatingMetricsCleaned = NebiusOperatingMetrics.map((item) => ({
   product_development_mm_usd: item.product_development_mm_usd,
   sga_mm_usd: item.sga_mm_usd,
   depreciation_amortization_mm_usd: item.depreciation_amortization_mm_usd,
+
+  cost_of_revenue_percentage: item.cost_of_revenue_mm_usd / item.revenue_mm_usd,
+  product_development_percentage:
+    item.product_development_mm_usd / item.revenue_mm_usd,
+  sga_percentage: item.sga_mm_usd / item.revenue_mm_usd,
+  depreciation_amortization_percentage:
+    item.depreciation_amortization_mm_usd / item.revenue_mm_usd,
 }));
 
 const FinancialLeverage = () => {
@@ -186,9 +194,7 @@ const FinancialLeveragePercentage = () => {
       <VictoryAxis
         dependentAxis
         label="USD (Billions)"
-        tickFormat={(tick) =>
-            `${tick*100}%`
-          }
+        tickFormat={(tick) => `${tick * 100}%`}
         axisLabelComponent={<VictoryLabel dy={-20} dx={0} angle={-90} />}
         style={{ tickLabels: { fontSize: 12 } }}
       />
@@ -213,7 +219,9 @@ const FinancialLeveragePercentage = () => {
           x="reportingQuarter"
           y="total_debt_percentage"
           alignment="middle"
-          labels={({ datum }) => `${datum.total_debt_percentage.toFixed(2)*100}%`}
+          labels={({ datum }) =>
+            `${datum.total_debt_percentage.toFixed(2) * 100}%`
+          }
           style={{
             data: { fill: "#ff4f81ff" },
             labels: { fontSize: 12, fill: "#ff4f81ff" },
@@ -226,7 +234,9 @@ const FinancialLeveragePercentage = () => {
           y="total_equity_percentage"
           alignment="middle"
           cornerRadius={{ topLeft: 5, topRight: 5 }}
-          labels={({ datum }) => `${datum.total_equity_percentage.toFixed(2)*100}%`}
+          labels={({ datum }) =>
+            `${datum.total_equity_percentage.toFixed(2) * 100}%`
+          }
           style={{
             data: { fill: "#538cfa" },
             labels: { fontSize: 12, fill: "#538cfa" },
@@ -237,7 +247,7 @@ const FinancialLeveragePercentage = () => {
   );
 };
 
-
+/* Operating Leverage Charts */
 const OperatingLeverage = () => {
   const [hiddenLines, setHiddenLines] = useState(new Set());
   const toggleLine = (index) => {
@@ -303,6 +313,7 @@ const OperatingLeverage = () => {
       }}
       theme={VictoryTheme.clean}
       containerComponent={<VictoryZoomContainer />}
+      
     >
       <VictoryLabel
         text="Operating Leverage"
@@ -370,7 +381,7 @@ const OperatingLeverage = () => {
           data: {
             stroke: "#2f75ffff",
             strokeWidth: 2.5,
-            opacity: hiddenLines.has(0) ? 0 : 1,
+            opacity: hiddenLines.has(0) ? 0 : 0.7,
           },
         }}
       />
@@ -434,4 +445,193 @@ const OperatingLeverage = () => {
   );
 };
 
-export { FinancialLeverage, OperatingLeverage, FinancialLeveragePercentage };
+const OperatingLeveragePercentage = () => {
+  const [hiddenLines, setHiddenLines] = useState(new Set());
+  const toggleLine = (index) => {
+    setHiddenLines((prev) => {
+      const newSet = new Set(prev);
+      newSet.has(index) ? newSet.delete(index) : newSet.add(index);
+      return newSet;
+    });
+  };
+
+  // Calculate max value from all percentage fields
+  const maxValue = Math.max(
+    ...NebiusOperatingMetricsCleaned.flatMap((item) => [
+      item.cost_of_revenue_percentage,
+      item.product_development_percentage,
+      item.sga_percentage,
+      item.depreciation_amortization_percentage,
+    ])
+  );
+
+  const legendData = [
+    {
+      name: "Cost of Revenue",
+      symbol: {
+        fill: "#ff4f81ff",
+        type: "circle",
+        opacity: hiddenLines.has(0) ? 0.5 : 1,
+      },
+    },
+    {
+      name: "Product Development",
+      symbol: {
+        fill: "#14b8a6",
+        type: "circle",
+        opacity: hiddenLines.has(1) ? 0.5 : 1,
+      },
+    },
+    {
+      name: "SG&A",
+      symbol: {
+        fill: "#818cf8",
+        type: "circle",
+        opacity: hiddenLines.has(2) ? 0.5 : 1,
+      },
+    },
+    {
+      name: "Depreciation & Amortization",
+      symbol: {
+        fill: "#bbcbe0ff",
+        type: "circle",
+        opacity: hiddenLines.has(3) ? 0.5 : 1,
+      },
+    },
+  ];
+
+  return (
+    <VictoryChart
+      width={700}
+      height={400}
+      padding={{
+        top: 80,
+        bottom: 75,
+        left: 80,
+        right: 80,
+      }}
+      theme={VictoryTheme.clean}
+      containerComponent={<VictoryZoomContainer />}
+    >
+      <VictoryLabel
+        text="Operating Leverage"
+        dx={34}
+        dy={26}
+        style={{
+          ...VictoryTheme.clean.label,
+          fontSize: 14,
+        }}
+      />
+
+      <VictoryLabel
+        text="Revenue growth relative to operating cost structure by quarter"
+        dx={34}
+        dy={42}
+        style={{
+          ...VictoryTheme.clean.label,
+          fontSize: 10,
+        }}
+      />
+
+      <VictoryAxis />
+
+      <VictoryAxis
+        dependentAxis
+        label="% of Revenue"
+        tickFormat={(t) => `${Math.round(t * 100)}%`}
+        domain={{ y: [0, maxValue*1.1] }}
+        axisLabelComponent={<VictoryLabel dy={-20} dx={0} angle={-90} />}
+        style={{
+          axisLabel: { fontSize: 12 },
+          tickLabels: { fontSize: 12 },
+          grid: { stroke: "#d9d9d9", size: 5 },
+        }}
+      />
+
+      <VictoryLegend
+        x={66}
+        y={350}
+        data={legendData}
+        style={{
+          label: { fontSize: 7 },
+          border: { stroke: "transparent" },
+          data: { cursor: "pointer" },
+        }}
+        events={[
+          {
+            target: "data",
+            eventHandlers: {
+              onClick: (evt, props) => {
+                toggleLine(props.index); // Toggle on click
+                return [];
+              },
+            },
+          },
+        ]}
+      />
+
+      <VictoryLine
+        data={NebiusOperatingMetricsCleaned}
+        x="reportingQuarter"
+        y="cost_of_revenue_percentage"
+        interpolation="natural"
+        style={{
+          data: {
+            stroke: "#fb326bff",
+            strokeWidth: 2.5,
+            opacity: hiddenLines.has(0) ? 0 : 0.7,
+          },
+        }}
+      />
+
+      <VictoryLine
+        data={NebiusOperatingMetricsCleaned}
+        x="reportingQuarter"
+        y="product_development_percentage"
+        interpolation="natural"
+        style={{
+          data: {
+            stroke: "#14b8a6",
+            strokeWidth: 2.5,
+            opacity: hiddenLines.has(1) ? 0 : 0.7,
+          },
+        }}
+      />
+
+      <VictoryLine
+        data={NebiusOperatingMetricsCleaned}
+        x="reportingQuarter"
+        y="sga_percentage"
+        interpolation="natural"
+        style={{
+          data: {
+            stroke: "#818cf8",
+            strokeWidth: 2.5,
+            opacity: hiddenLines.has(2) ? 0 : 0.7,
+          },
+        }}
+      />
+
+      <VictoryLine
+        data={NebiusOperatingMetricsCleaned}
+        x="reportingQuarter"
+        y="depreciation_amortization_percentage"
+        interpolation="natural"
+        style={{
+          data: {
+            stroke: "#bbcbe0ff",
+            strokeWidth: 2.5,
+            opacity: hiddenLines.has(3) ? 0 : 1,
+          },
+        }}
+      />
+    </VictoryChart>
+  );
+};
+
+export {
+  FinancialLeverage,
+  FinancialLeveragePercentage,
+  OperatingLeverage,
+  OperatingLeveragePercentage,
+};

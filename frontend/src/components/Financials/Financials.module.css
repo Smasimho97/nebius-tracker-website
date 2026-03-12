@@ -10,9 +10,17 @@
   align-items: center;
   padding: 0 0 0.75rem 0;
   margin: 0;
-  font-family: var(--font-primary);
+  font-family: var(--font-secondary);
   font-size: 2.25rem;
   color: var(--text-header-color);
+}
+
+.cardTitle {
+  margin-top: 1rem;
+  font-family: var(--font-tertiary);
+  font-weight: 400;
+  font-size: 1rem;
+  color: black;
 }
 
 .card {
@@ -23,21 +31,13 @@
   width: 100%;
   height: 25rem;
   background: #f3f6f8;
-  backdrop-filter: blur(10px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(10px) saturate(150%);
   font-family: var(--font-secondary);
   font-size: 2.25rem;
   color: var(--text-secondary-color);
-}
-
-.cardTitle {
-  margin-top: 1rem;
-  font-family: "roboto", sans-serif;
-  font-width: 400;
-  font-size: 1rem;
-  color: black;
 }
 
 .unitToggleContainer {
@@ -52,7 +52,7 @@
 }
 
 .unitToggleBarText {
-  font-family: "roboto", sans-serif;
+  font-family: var(--font-tertiary);
   font-size: 10px;
   color: rgb(166, 166, 166);
 }
@@ -60,28 +60,24 @@
 .unitToggleBar {
   display: flex;
   align-items: center;
-  padding: 0 0.05rem;
   width: 2.5rem;
-  height: 1.2rem;
+  height: 1.1rem;
+  border-radius: 9px;
   border: 1px solid rgba(166, 166, 166, 0.6);
-  border-radius: 10px;
-  cursor: pointer;
 }
 
 .unitToggleButton {
+  align-self: flex-start;
+  width: 1rem;
+  height: 1rem;
   background: linear-gradient(90deg, #dcdcdc 0%, #aeaeae 100%);
   border: none;
-  border-radius: 50%;
-  width: 0.95rem;
-  height: 0.95rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  transition: transform 0.3s ease;
   cursor: pointer;
 }
 
-.unitToggleButton.toggled {
-  transform: translateX(1.25rem);
-}
+.unitToggleButton.toggled { transform: translateX(23px); }
 
 @media (max-width: 925px) {
   .cardGrid {

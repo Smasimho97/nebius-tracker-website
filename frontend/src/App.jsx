@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
-import DatacenterPage from "./pages/DatacenterPage.jsx";
-import KnowledgePage from "./pages/KnowledgePage.jsx";
+import DatacenterTimeline from "./pages/DatacenterTimeline.jsx";
+import Financials from "./pages/Financials.jsx";
 import "./App.css";
 
 function App() {
@@ -9,8 +9,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/datacenter" element={<DatacenterPage />} />
-        <Route path="/knowledge" element={<KnowledgePage />} />
+        <Route path="/datacenter_timeline" element={<DatacenterTimeline />} />
+        <Route path="/financials" element={<Financials />} />
       </Routes>
     </BrowserRouter>
   );

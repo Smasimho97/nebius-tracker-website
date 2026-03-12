@@ -1,0 +1,115 @@
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* shared typography */
+.navButton,
+.dropdownItemContainer,
+.dropdownItem,
+.contactContainer {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.3rem 1.5rem;
+  background: transparent;
+}
+
+.logo {
+  height: 2rem;
+  animation: fade-in 1s ease-in;
+}
+
+/* nav */
+.navList {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0;
+  list-style: none;
+  animation: fade-in 1s ease-in;
+}
+
+.navButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: 50px;
+  color: rgba(30, 50, 70, 0.6);
+  text-decoration: none;
+  animation: fade-in 1s ease-in;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.navButton:hover  { background: rgba(82, 47, 151, 0.08); }
+.navButton.active { color: var(--yellow-900); border-color: rgba(224, 255, 79, 0.2); }
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* dropdown */
+.dropdown {
+  position: absolute;
+  top: 0;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 1rem 2.5rem 0;
+  gap: 0.5rem;
+  background: rgba(247, 247, 247, 0.75);
+  border-radius: 0 0 20px 20px;
+  box-shadow: 5px 5px 2px rgba(7, 14, 26, 0.1);
+  backdrop-filter: blur(8px);
+  animation: fade-in 0.3s ease;
+}
+
+.dropdownItemContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 8px;
+  color: rgba(30, 50, 70, 0.6);
+}
+
+/* contact */
+.contactContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 0;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: rgba(30, 50, 70, 0.6);
+  cursor: pointer;
+}
+
+@media (max-width: 530px) {
+  .header    { width: 100%; }
+  .nav       { display: none; }
+  .hamburger { display: block; }
+}

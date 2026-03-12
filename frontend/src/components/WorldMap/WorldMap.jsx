@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./WorldMap.module.css";
+import WaveBackground from "./WaveBackground.jsx";
 import {
   ComposableMap,
   Geographies,
@@ -7,7 +8,9 @@ import {
   ZoomableGroup,
   Marker,
 } from "react-simple-maps";
+import { Graticule, Line } from "react-simple-maps";
 import markerStyles from "./Marker.module.css";
+import MapHeader from "../Header/MapHeader/MapHeader.jsx";
 import { nebiusSites } from "../../data/nebiusSites.js";
 
 const worldGeoUrl =
@@ -15,49 +18,66 @@ const worldGeoUrl =
 const usGeoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
 export default function MapChart() {
-  const width = 1280;
-  const height = 720;
-
-  const activePower = nebiusSites
+  const activeMW = nebiusSites
     .filter((site) => site.status === "Active")
-    .reduce((sum, site) => sum + site.activePower, 0);
+    .reduce((sum, site) => sum + site.activeMW, 0);
 
-  const targetPower = nebiusSites
-    .filter((site) => site.targetPower != null)
-    .reduce((sum, site) => sum + site.targetPower, 0);
+  const capacityMW = nebiusSites
+    .filter((site) => site.capacityMW != "")
+    .reduce((sum, site) => sum + site.capacityMW, 0);
 
   const activeSites = nebiusSites.reduce(
     (count, site) => (site.status === "Active" ? count + 1 : count),
-    0
+    0,
   );
 
   const constructingSites = nebiusSites.reduce(
     (count, site) => (site.status === "Constructing" ? count + 1 : count),
-    0
+    0,
   );
 
   const potentialSites = nebiusSites.reduce(
-    (count, site) => (site.status === "Potential" ? count + 1 : count),
-    0
+    (count, site) => (site.status === "Announced" ? count + 1 : count),
+    0,
+  );
+
+  const builtSites = nebiusSites.reduce(
+    (count, site) => (site.type === "Built" ? count + 1 : count),
+    0,
+  );
+
+  const colocationSites = nebiusSites.reduce(
+    (count, site) => (site.type === "Colocation" ? count + 1 : count),
+    0,
+  );
+
+  const ownedSites = nebiusSites.reduce(
+    (count, site) => (site.type === "Owned" ? count + 1 : count),
+    0,
   );
 
   const status_colors = {
-    Active: "#00ffddff",
-    Construction: "#f9ff4fff",
-    Potential: "#ff4f81ff",
-    HQ: "#9359ffff",
-    Satellite: "#9359ffff",
+    Announced: "#76c1fe" /*ff4f81ff*/ /*#6b9eff*/,
+    Construction: "rgba(250, 204, 21, 1)", /*#fb7185*/
+    Active: "rgb(0, 255, 221)",
+  };
+
+  const type_colors = {
+    Owned: "#34d399",
+    Colocation: "#ff6179",
+    Built: "#e0ff4f",
   };
 
   const [activeMarker, setActiveMarker] = useState(null);
-  const [activeInfo, setActiveInfo] = useState(null);
+  const [activeInfo, setActiveInfo] = useState(true);
+  const [activeStatus, setActiveStatus] = useState(true);
 
   return (
-    <div className="constructorContainer">
-      <section className="section" />
-      <h2 className={styles.mapHeader}> DATACENTER TRACKER </h2>
-
+    <>
       <div className={styles.mapWindow}>
+        <WaveBackground/>
+        <MapHeader />
+        <div style={{ position: "absolute", inset: 0, zIndex: 1 }}>
         <ComposableMap
           projection="geoMercator"
           projectionConfig={{
@@ -66,32 +86,38 @@ export default function MapChart() {
             // parallels: [0, 0],
             scale: 170,
           }}
-          width={width}
-          height={height}
           style={{
-            backgroundColor: "var(--map-base-color)",
+            width: "100%",
+            height: "100%",
+            display: "block",
             userSelect: "none",
             WebkitUserSelect: "none",
           }}
           // projection={projection}
         >
           <ZoomableGroup
+            center={[11, 45]}
+            zoom={0.75} /* Start with .6 */
+            minZoom={0.7}
+            maxZoom={8}
             translateExtent={[
-              [-40, -100],
-              [1320, 745],
+              [-250, -250],
+              [1050, 700],
             ]}
-            center={[11, 44]} // [lon, lat] — center on initial render
-            zoom={1.0} // initial zoom level
-            minZoom={0.9} // optional: don't let user zoom too far out
-            maxZoom={15} // optional: don't let user zoom too far in
           >
+            <Graticule
+              stroke="rgba(88, 132, 242, 0.08)"
+              strokeWidth={0.3}
+              globe={false}
+            />
+            /* left, top, right, bottom */
             <Geographies geography={worldGeoUrl}>
               {({ geographies }) =>
                 geographies
                   .filter(
                     (geo) =>
                       geo.properties.name !== "Antarctica" &&
-                      geo.properties.name !== "United States of America"
+                      geo.properties.name !== "United States of America",
                   )
                   .map((geo) => (
                     <Geography
@@ -99,15 +125,15 @@ export default function MapChart() {
                       geography={geo}
                       style={{
                         default: {
-                          fill: "var(--map-land-color)",
+                          fill: "rgba(145, 173, 208, 0.6)" /*#102e4a"*/,
                           outline: "none",
-                          stroke: "#5884f2",
-                          strokeWidth: "0.3",
+                          stroke: "var(--map-stroke-color)",
+                          strokeWidth: "0.25",
                         },
                         hover: {
                           fill: "var(--map-land-hover-color)", // land gets lighter
-                          stroke: "#5884f2", // border changes #5884f2 #D7F063
-                          strokeWidth: "0.5",
+                          stroke: "var(--map-stroke-color)", // border changes #5884f2 #D7F063
+                          strokeWidth: "0.25",
                           outline: "none",
                           cursor: "pointer",
                         },
@@ -120,7 +146,6 @@ export default function MapChart() {
                   ))
               }
             </Geographies>
-
             <Geographies geography={usGeoUrl}>
               {({ geographies }) =>
                 geographies.map((geo) => (
@@ -129,15 +154,15 @@ export default function MapChart() {
                     geography={geo}
                     style={{
                       default: {
-                        fill: "var(--map-land-color)", // transparent fill so you see world map underneath
-                        stroke: "#5884f2", // state borders
-                        strokeWidth: "0.3",
+                        fill: "rgba(145, 173, 208, 0.6)", // transparent fill so you see world map underneath
+                        stroke: "var(--map-stroke-color)", // state borders
+                        strokeWidth: "0.25",
                         outline: "none",
                       },
                       hover: {
                         fill: "var(--map-land-hover-color)",
-                        stroke: "#5884f2",
-                        strokeWidth: "0.5",
+                        stroke: "var(--map-stroke-color)",
+                        strokeWidth: "0.25",
                         outline: "none",
                         cursor: "pointer",
                       },
@@ -146,107 +171,98 @@ export default function MapChart() {
                 ))
               }
             </Geographies>
-
+            {/* Marker Logic */}
             {nebiusSites.map((site) => {
-              const color = status_colors[site.status];
+              const color =
+                activeStatus === true
+                  ? status_colors[site.status]
+                  : type_colors[site.type];
 
               return (
                 <Marker
-                  key={site.city}
-                  coordinates={site.coordinates}
-                  onMouseEnter={() => setActiveMarker(site.city)}
+                  key={site.datacenter_id}
+                  coordinates={
+                    site.markerCoordinates
+                      ? site.markerCoordinates
+                      : site.coordinates
+                  }
+                  onMouseEnter={() => setActiveMarker(site.datacenter_id)}
                   onMouseLeave={() => setActiveMarker(null)}
                 >
                   <g className={markerStyles.markerSvg}>
-                    <circle
-                      className={markerStyles.core}
-                      r=".8"
+                    {/* Cylinder body - scaled to 60% */}
+                    <path
+                      d="M -1.8 0 L -1.8 1.2 Q -1.8 1.8 0 1.8 Q 1.8 1.8 1.8 1.2 L 1.8 0"
                       fill={color}
-                      cx="0"
-                      cy="0"
+                      opacity="0.8"
                     />
-                    <circle
-                      className={markerStyles.pulse}
-                      r=".8"
-                      fill={color}
+
+                    {/* Cylinder top */}
+                    <ellipse
                       cx="0"
                       cy="0"
+                      rx="1.8"
+                      ry="0.6"
+                      fill={color}
+                      stroke="rgba(255, 255, 255, 0.3)"
+                      strokeWidth="0.1"
                     />
-                    <circle
-                      className={markerStyles.pulse}
-                      r=".8"
-                      fill={color}
+
+                    {/* Highlight on top */}
+                    <ellipse
                       cx="0"
                       cy="0"
-                    />
-                    <circle
-                      className={markerStyles.pulse}
-                      r=".8"
-                      fill={color}
-                      cx="0"
-                      cy="0"
-                    />
-                    <circle
-                      className={markerStyles.pulse}
-                      r=".8"
-                      fill={color}
-                      cx="0"
-                      cy="0"
+                      rx="1.2"
+                      ry="0.36"
+                      fill="rgba(255, 255, 255, 0.2)"
                     />
                   </g>
                 </Marker>
               );
             })}
-
             {activeMarker &&
               nebiusSites
-                .filter((site) => site.city === activeMarker)
+                .filter((site) => site.datacenter_id === activeMarker)
                 .map((site) => {
-                  const color = status_colors[site.status];
+                  const color = (activeStatus === true ? status_colors[site.status] : type_colors[site.type]);
+                  if (site.type === "Built") site = { ...site, type: "Build-to-Suit" };
                   return (
                     <Marker
                       key={`popup-${site.city}`}
                       coordinates={site.coordinates}
                     >
                       {/* Background rectangle */}
+                      <defs>
+                        <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="#1e2e42"/>
+                          <stop offset="100%" stopColor="#162030"/>
+                        </linearGradient>
+                      </defs>
+
                       <rect
                         x="5"
                         y="-10"
                         width="60"
-                        height="34"
-                        fill="rgba(30, 42, 58, 0.95)"
+                        height="38.5"
+                        fill="url(#bgGrad)"
                         stroke={color}
-                        strokeWidth="0.5"
+                        strokeWidth="0.25"
                         rx="2"
                         ry="2"
                       />
 
                       {/* Status dot and text header */}
                       <g>
-                        <circle
-                          cx="11"
-                          cy="-4.6"
-                          r="1.15"
-                          fill={color}
-                          className={markerStyles.statusDot}
-                        />
-
-                        <text
-                          x="14"
-                          y="-3.5"
-                          className={markerStyles.statusText}
-                          fill={color}
-                          stroke={color}
-                          strokeWidth="0.1"
-                        >
-                          {site.type === "Office"
-                            ? site.type.toUpperCase()
-                            : site.status.toUpperCase()}
+                        <circle cx="11" cy="-4.3" r=".8" fill={color} className={markerStyles.statusDot}/>
+                        <text x="14" y="-3.7" className={markerStyles.statusText} fill={color} stroke={color} strokeWidth="0.1">
+                          {activeStatus 
+                            ? site.status.toUpperCase() 
+                            :  site.type.toUpperCase()}
                         </text>
                       </g>
 
                       {/* City name */}
-                      <text x="10" y="3.5" className={markerStyles.popupCity}>
+                      <text x="10" y="3" className={markerStyles.popupCity}>
                         {site.country === "USA"
                           ? `${site.city}, ${site.state}`
                           : site.city}
@@ -255,72 +271,199 @@ export default function MapChart() {
                       {/* Info rows */}
                       <g>
                         {/* Power row */}
-                        <line
-                          x1="10"
-                          y1="6"
-                          x2="60"
-                          y2="6"
-                          stroke="rgba(255, 255, 255, 0.1)"
-                          strokeWidth="0.3"
-                        />
-                        <text x="10" y="11" className={markerStyles.popupLabel}>
-                          {site.type === "Office" ? "CAMPUS" : "POWER"}{" "}
-                        </text>
-                        <text
-                          x="60"
-                          y={site.type === "Office" ? "11" : "11.5"}
-                          className={
-                            site.type === "Office"
-                              ? markerStyles.popupLocationValue
-                              : markerStyles.popupValue
-                          }
-                          textAnchor="end"
-                        >
-                          {site.activePower === "Pending"
-                            ? "Pending"
-                            : site.type === "Office"
-                            ? site.status
-                            : `${site.activePower} MW`}
+                        <line x1="10" y1="6.25" x2="60" y2="6.25" stroke={color} strokeWidth="0.2" opacity="0.2"/>
+                        
+                        
+                        {/* Power Bar */}
+                        <text x="10" y="10.75" className={markerStyles.popupLabel}>
+                          {"POWER"}{" "}
                         </text>
 
+                        <text x="60" y="11.00" className={markerStyles.popupValueBig} textAnchor="end" style={{ fill: color }}>
+                          {site.activeMW === ""
+                            ? " 0 MW"
+                            : `${site.activeMW} MW`}
+                        </text>
+
+                        <text x="60" y="13.00" font-family="'DM Mono','Courier New',monospace" font-size="1.3" fill="rgb(255, 255, 255)" textAnchor="end" letterSpacing="0.08em">
+                          {site.capacityMW === "" 
+                            ? "UNKNOWN CAPACITY" 
+                            : site.activeMW === site.capacityMW 
+                            ? "100% CAPACITY" 
+                            : `${site.capacityMW} MW CAPACITY`}
+                        </text>
+
+
+
+                        <rect x="10" y="14.0" width="50" height=".5" fill="rgba(255,255,255,0.06)" rx=".25"/>
+                        <rect x="10" y="14.0" width={site.activeMW === "" ? 0 : (site.activeMW / site.capacityMW) * 50} height=".5" fill={color} rx=".25"/>
+                        
+                        {/* Type OR Status */}
+                        <text x="10" y="19.0" className={markerStyles.popupLabel}>
+                          {activeStatus 
+                            ? "TYPE" 
+                            : "STATUS" }
+                        </text>
+
+                        <text x="60" y="19.0" className={markerStyles.popupValue} textAnchor="end">
+                          {activeStatus 
+                            ? site.type
+                            : site.status }
+                        </text>
+
+
                         {/* Location row */}
-                        <line
-                          x1="10"
-                          y1="14"
-                          x2="60"
-                          y2="14"
-                          stroke="rgba(255, 255, 255, 0.1)"
-                          strokeWidth="0.3"
-                        />
-                        <text x="10" y="19" className={markerStyles.popupLabel}>
+                        <text x="10" y="23.5" className={markerStyles.popupLabel}>
                           LOCATION
                         </text>
-                        <text
-                          x="60"
-                          y="19"
-                          className={markerStyles.popupLocationValue}
-                          textAnchor="end"
-                        >
+                        <text x="60" y="23.5" className={markerStyles.popupValue} textAnchor="end">
                           {site.country}
                         </text>
+
+                        
                       </g>
                     </Marker>
                   );
                 })}
           </ZoomableGroup>
         </ComposableMap>
+        </div>
+
+        {/* Map Overlay */}
+        {activeInfo === false && (
+          <div className={styles.mapOverlay}>
+            <button
+              className={styles.exitButton}
+              onClick={() => setActiveInfo((prev) => !prev)}
+            >
+              {" "}
+              ×{" "}
+            </button>
+
+            <div className={styles.legendContainer}>
+              {activeStatus && (
+                <>
+                  <div className={styles.legendItemContainer}>
+                    <div
+                      className={`${styles.statusIndicator} ${styles.activePowerIcon}`}
+                    ></div>
+                    <div className={styles.legendItemContent}>
+                      <div className={styles.legendItemKey}> Active </div>
+                      <div className={styles.legendItemAttributes}>
+                        {" "}
+                        {activeSites} Sites • {activeMW} MW
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className={styles.legendItemContainer}>
+                    <div
+                      className={`${styles.statusIndicator} ${styles.constructingPowerIcon}`}
+                    ></div>
+                    <div className={styles.legendItemContent}>
+                      <div className={styles.legendItemKey}> Construction </div>
+                      <div className={styles.legendItemAttributes}>
+                        {" "}
+                        {constructingSites} sites{" "}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className={styles.legendItemContainer}>
+                    <div
+                      className={`${styles.statusIndicator} ${styles.announcedPowerIcon}`}
+                    ></div>
+                    <div className={styles.legendItemContent}>
+                      <div className={styles.legendItemKey}> Announced </div>
+                      <div className={styles.legendItemAttributes}>
+                        {" "}
+                        {potentialSites} sites{" "}
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {activeStatus === false && (
+                <>
+
+                 <div className={styles.legendItemContainer}>
+                    <div
+                      className={`${styles.statusIndicator} ${styles.ownedPowerIcon}`}
+                    ></div>
+                    <div className={styles.legendItemContent}>
+                      <div className={styles.legendItemKey}> Owned </div>
+                      <div className={styles.legendItemAttributes}>
+                        {" "}
+                        {ownedSites} sites{" "}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className={styles.legendItemContainer}>
+                    <div
+                      className={`${styles.statusIndicator} ${styles.builtPowerIcon}`}
+                    ></div>
+                    <div className={styles.legendItemContent}>
+                      <div className={styles.legendItemKey}>
+                        {" "}
+                        Build-to-Suit{" "}
+                      </div>
+                      <div className={styles.legendItemAttributes}>
+                        {" "}
+                        {builtSites} Sites
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className={styles.legendItemContainer}>
+                    <div
+                      className={`${styles.statusIndicator} ${styles.colocationPowerIcon}`}
+                    ></div>
+                    <div className={styles.legendItemContent}>
+                      <div className={styles.legendItemKey}> Colocation </div>
+                      <div className={styles.legendItemAttributes}>
+                        {" "}
+                        {colocationSites} sites{" "}
+                      </div>
+                    </div>
+                  </div>
+
+                 
+                </>
+              )}
+            </div>
+
+            <div className={styles.divider}></div>
+
+            <div className={styles.toggleSlash}>
+              <span
+                className={`${styles.toggleSlashOpt} ${activeStatus ? styles.active : ""}`}
+                onClick={() => !activeStatus && setActiveStatus(true)}
+              >
+                {" "}
+                Status{" "}
+              </span>
+              <span className={styles.toggleSlashOpt}> / </span>
+              <span
+                className={`${styles.toggleSlashOpt} ${activeStatus === false ? styles.active : ""}`}
+                onClick={() => activeStatus && setActiveStatus(false)}
+              >
+                {" "}
+                Type{" "}
+              </span>
+            </div>
+          </div>
+        )}
 
         {/* Active Power Badge */}
-        {activeInfo === null && (
+        {activeInfo === true && (
           <div className={styles.activePowerContainer}>
             <div
               className={`${styles.statusIndicator} ${styles.activePowerIcon}`}
             ></div>
             <div className={styles.activePowerContent}>
-              <span className={styles.activePowerNumber}>
-                {" "}
-                {activePower} MW{" "}
-              </span>
+              <span className={styles.activePowerNumber}> {activeMW} MW </span>
               <span className={styles.activePowerText}> Active Power </span>
             </div>
             <button
@@ -331,69 +474,7 @@ export default function MapChart() {
             </button>
           </div>
         )}
-
-        {/* Conditional Legend Overlay */}
-
-        {activeInfo && (
-          <div className={styles.statusOverlay}>
-            <div className={styles.legendContainer}>
-              <div className={styles.legendItemContainer}>
-                <div
-                  className={`${styles.statusIndicator} ${styles.activePowerIcon}`}
-                ></div>
-                <div className={styles.legendItemContent}>
-                  <div className={styles.legendItemKey}> Active </div>
-                  <div className={styles.legendItemAttributes}>
-                    {" "}
-                    {activeSites} Sites • {activePower} MW
-                  </div>
-                </div>
-
-                <div className={styles.legendItemContainer}>
-                  <div
-                    className={`${styles.statusIndicator} ${styles.constructingPowerIcon}`}
-                  ></div>
-                  <div className={styles.legendItemContent}>
-                    <div className={styles.legendItemKey}> Construction </div>
-                    <div className={styles.legendItemAttributes}>
-                      {" "}
-                      {constructingSites} sites{" "}
-                    </div>
-                  </div>
-                </div>
-
-                <div className={styles.legendItemContainer}>
-                  <div
-                    className={`${styles.statusIndicator} ${styles.potentialPowerIcon}`}
-                  ></div>
-                  <div className={styles.legendItemContent}>
-                    <div className={styles.legendItemKey}> Potential </div>
-                    <div className={styles.legendItemAttributes}>
-                      {" "}
-                      {potentialSites} sites{" "}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.totalPipelineContainer}>
-              <div className={styles.totalPipelineKey}> {targetPower} MW </div>
-              <div className={styles.totalPipelineAttributes}>
-                Total Pipeline
-              </div>
-            </div>
-
-            <button
-              className={styles.exitButton}
-              onClick={() => setActiveInfo(null)}
-              aria-label="Close legend"
-            >
-              ×
-            </button>
-          </div>
-        )}
       </div>
-    </div>
+    </>
   );
 }
