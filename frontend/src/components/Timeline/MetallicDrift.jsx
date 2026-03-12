@@ -52,7 +52,7 @@ export default function MetallicDrift() {
     const drift2 = new THREE.PointLight(0xd0e8ff, 0.8, 40);
     scene.add(drift2);
 
-    const geo = new THREE.PlaneGeometry(60, 60, 400, 400);
+    const geo = new THREE.PlaneGeometry(80, 80, 400, 400);
     geo.rotateX(-Math.PI / 2);
 
     const pos = geo.attributes.position;
