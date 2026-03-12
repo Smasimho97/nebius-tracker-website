@@ -158,7 +158,7 @@ export default function MetallicDrift() {
   return (
     <div
       ref={mountRef}
-      style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none" }}
+      style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none" }}
     />
   );
 }
