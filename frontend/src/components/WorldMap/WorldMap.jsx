@@ -99,7 +99,7 @@ export default function MapChart() {
             center={[11, 45]}
             zoom={0.75} /* Start with .6 */
             minZoom={0.7}
-            maxZoom={10}
+            maxZoom={15}
             translateExtent={[
               [-250, -250],
               [1050, 700],
