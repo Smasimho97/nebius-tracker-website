@@ -12,9 +12,9 @@ export default function Timeline() {
 
     const [isLegendActive, setLegendActive] = useState(0);
 
-    const [isAmericasActive, setAmericasActive] = useState(true);
-    const [isEuropeActive, setEuropeActive] = useState(true);
-    const [isMiddleEastActive, setMiddleEastActive] = useState(true);
+    const [isAmericasActive, setAmericasActive] = useState(false);
+    const [isEuropeActive, setEuropeActive] = useState(false);
+    const [isMiddleEastActive, setMiddleEastActive] = useState(false);
 
     const americasSites = nebiusSites.filter((site)=> (site.region === "Americas"));
     const europeSites = nebiusSites.filter((site)=> (site.region === "Europe"));
