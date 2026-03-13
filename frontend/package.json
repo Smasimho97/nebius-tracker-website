@@ -15,6 +15,7 @@
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.3.6",
     "@mui/x-charts": "^8.23.0",
+    "@vercel/analytics": "^2.0.1",
     "d3-geo": "^3.1.1",
     "lucide": "^0.562.0",
     "lucide-react": "^0.562.0",
