@@ -50,7 +50,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow-x: hidden;
   ::selection {
     background-color: #e0ff4f;
   }
