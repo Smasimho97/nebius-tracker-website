@@ -40,8 +40,11 @@ export const nebiusSites = [
     markerCoordinates: [-93.8155, 39.33],
     date: [
       { quarter: 4, year: 25, power: "-", type: "announced"},
-      { quarter: 4, year: 26, power: 250,  type: "target" },
-      { quarter: 4, year: 27, power: 1100, type: "target" },
+      { quarter: 4, year: 26, power: 50, type: "target"},
+      { quarter: 1, year: 27, power: 100, type: "target"},
+      { quarter: 2, year: 27, power: 150, type: "target"},
+      { quarter: 3, year: 27, power: 200,  type: "target" },
+      { quarter: 4, year: 27, power: 250,  type: "target" }
     ]
   },
   {
@@ -214,7 +217,7 @@ export const nebiusSites = [
     markerCoordinates: [35, 32.85],
     date: [
       { quarter: 1, year: 26, power: "-", type: "announced" },
-      { quarter: 3, year: 26, power: 58, type: "target" },
+      { quarter: 4, year: 26, power: 58, type: "target" },
     ]
   },
 ];
