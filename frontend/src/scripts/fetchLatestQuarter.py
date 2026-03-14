@@ -9,7 +9,13 @@ def get_latest_nebius_quarter():
     year = int(str(match.group(2))[-2:])
     return quarter, year
 
+def advance_quarter(quarter, year):
+    if quarter == 4:
+        return 1, year + 1
+    return quarter + 1, year
+
 quarter, year = get_latest_nebius_quarter()
+quarter, year = advance_quarter(quarter, year)
 
 with open("src/data/currentQuarter.json", "w") as f:
     json.dump({ "quarter": quarter, "year": year }, f)

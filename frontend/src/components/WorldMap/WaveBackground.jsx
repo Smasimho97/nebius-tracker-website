@@ -31,7 +31,7 @@ export default function RoilingBackground() {
     camera.lookAt(0, 0, 0);
 
     // ── Geometry ───────────────────────────────────────────────
-    const SEGS = 300;
+    const SEGS = 400;
     const SIZE = 80;
     const geo = new THREE.PlaneGeometry(SIZE, SIZE, SEGS, SEGS);
     geo.rotateX(-Math.PI / 2);

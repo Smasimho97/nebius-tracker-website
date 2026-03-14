@@ -22,10 +22,6 @@ export default function MapChart() {
     .filter((site) => site.status === "Active")
     .reduce((sum, site) => sum + site.activeMW, 0);
 
-  const capacityMW = nebiusSites
-    .filter((site) => site.capacityMW != "")
-    .reduce((sum, site) => sum + site.capacityMW, 0);
-
   const activeSites = nebiusSites.reduce(
     (count, site) => (site.status === "Active" ? count + 1 : count),
     0,

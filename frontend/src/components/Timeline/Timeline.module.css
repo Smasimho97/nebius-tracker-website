@@ -276,6 +276,16 @@
   font-weight: 700;
 }
 
+.speculativeFlag {
+  position: absolute;
+  top: 0;
+  right: 4px;
+  color: white;
+
+  font-family: var(--font-secondary);
+  font-size: 10px;
+}
+
 /* total MW axis */
 .totalContainer {
   display: flex;

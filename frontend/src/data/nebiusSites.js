@@ -9,8 +9,11 @@ export const nebiusSites = [
     markerCoordinates: [-74.9484, 39.8889],
     date: [
       { quarter: 1, year: 25, power: "-", type: "announced"},
-      { quarter: 4, year: 25, power: 50,  type: "actual" },
-      { quarter: 4, year: 26, power: 350,  type: "target" },
+      { quarter: 4, year: 25, power: 70,  type: "actual" },
+      { quarter: 1, year: 26, power: 125,  type: "actual"},
+      { quarter: 2, year: 26, power: 200,  type: "target"},
+      { quarter: 3, year: 26, power: 275,  type: "target"},
+      { quarter: 4, year: 26, power: 350,  type: "target"},
     ]
   },
   {
@@ -85,7 +88,7 @@ export const nebiusSites = [
     date: [
       { quarter: 2, year: 24, power: 25, type: "actual" },
       { quarter: 4, year: 25, power: 50, type: "actual" },
-      { quarter: 1, year: 26, power: 75, type: "target" },
+      { quarter: 1, year: 26, power: 75, type: "actual", flag: "?" },
     ]
   },
   {
@@ -159,7 +162,21 @@ export const nebiusSites = [
     date: [
       { quarter: 1, year: 26, power: "-", type: "announced"},
       { quarter: 4, year: 26, power: 120, type: "target" },
+      { quarter: 1, year: 27, power: 150, type: "target" },
+      { quarter: 2, year: 27, power: 180, type: "target" },
+      { quarter: 3, year: 27, power: 210, type: "target" },
       { quarter: 4, year: 27, power: 240, type: "target" },
+    ]
+  },
+  {
+    datacenter_id: "EU-WEST4",
+    region: "Europe",
+    country: "Spain", city: "Madrid",
+    activeMW: "", expansionMW: "", capacityMW: "",
+    type: "Colocation", status: "Announced",
+    coordinates: [-3.7038, 40.4168],
+    date: [
+      { quarter: 1, year: 26, power: "-", type: "announced"},
     ]
   },
   {

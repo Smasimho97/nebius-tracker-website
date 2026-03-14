@@ -12,8 +12,8 @@ export default function Timeline() {
 
     const [isLegendActive, setLegendActive] = useState(0);
 
-    const [isAmericasActive, setAmericasActive] = useState(false);
-    const [isEuropeActive, setEuropeActive] = useState(false);
+    const [isAmericasActive, setAmericasActive] = useState(() => window.innerHeight >= 480);
+    const [isEuropeActive, setEuropeActive] = useState(() => window.innerHeight >= 770);
     const [isMiddleEastActive, setMiddleEastActive] = useState(false);
 
     const americasSites = nebiusSites.filter((site)=> (site.region === "Americas"));
@@ -85,7 +85,7 @@ export default function Timeline() {
                                 style={{ gridColumn: !isAmericasActive ? '1' : '1 / -1' }}> Americas </button>
                         
                         {isAmericasActive && americasSites.map((site, rowIndex) => {
-                            let lastEntry = [null, null, null, null];
+                            let lastEntry = [null, null, null]
                             let isCurrent = false;
                             
                             return (
@@ -104,7 +104,8 @@ export default function Timeline() {
                                         if (hasEntry) {
                                             lastEntry[0] = entry.type;
                                             lastEntry[1] = entry.power;
-                                        }
+                                            lastEntry[2] = entry.flag;
+                                         }
 
                                         if (col.quarter === CURRENT_QUARTER && col.year === CURRENT_YEAR) {
                                             isCurrent = true;
@@ -122,11 +123,17 @@ export default function Timeline() {
                                                                 ${isCurrent && lastEntry[0] == "actual" ? styles.currentActive :
                                                                 isCurrent && lastEntry[0] == "target" ? styles.currentTarget : 
                                                                 isCurrent && lastEntry[0] == "announced" ? styles.currentAnnounced : 
-                                                                ""}`                  
+                                                                ""}`   
+                                                                
+                                                                
                                                             }
                                                             style={{ animationDelay: `${(rowIndex + colIndex) * 38}ms` }}
                                                             >
                                                     {lastEntry[1]}
+                                                    <div className={styles.speculativeFlag}>
+                                                        {lastEntry[2]}
+                                                    </div>
+  
                                                 </div>
                                         )
                                     })}

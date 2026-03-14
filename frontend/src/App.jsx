@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.jsx";
 import DatacenterTimeline from "./pages/DatacenterTimeline.jsx";
 import Financials from "./pages/Financials.jsx";
-import "./App.css";
 
 function App() {
   return (
