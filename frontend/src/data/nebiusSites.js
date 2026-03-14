@@ -3,7 +3,7 @@ export const nebiusSites = [
     datacenter_id: "USEAST-1",
     region: "Americas",
     country: "USA", state: "NJ", city: "Vineland",
-    activeMW: 50, expansionMW: 300, capacityMW: 350,
+    activeMW: 125, expansionMW: 300, capacityMW: 350,
     type: "Built", status: "Active",
     coordinates: [-75.0484, 39.4889],
     markerCoordinates: [-74.9484, 39.8889],
@@ -85,7 +85,7 @@ export const nebiusSites = [
     datacenter_id: "EU-NORTH1",
     region: "Europe",
     country: "Finland", city: "Mäntsälä",
-    activeMW: 50, expansionMW: 25, capacityMW: 75,
+    activeMW: 75, expansionMW: 0, capacityMW: 75,
     type: "Owned", status: "Active",
     coordinates: [25.3167, 60.6333],
     date: [
