@@ -103,7 +103,7 @@ export const nebiusSites = [
     type: "Owned", status: "Active",
     coordinates: [28.1887, 61.0587],
     date: [
-      { quarter: 1, year: 25, power: "-", type: "announced" },
+      { quarter: 1, year: 26, power: "-", type: "announced" },
       { quarter: 4, year: 27, power: 155, type: "target"},
     ]
   },
@@ -192,6 +192,17 @@ export const nebiusSites = [
     activeMW: "", expansionMW: "", capacityMW: "",
     type: "Colocation", status: "Announced",
     coordinates: [-3.7038, 40.4168],
+    date: [
+      { quarter: 1, year: 26, power: "-", type: "announced"},
+    ]
+  },
+  {
+    datacenter_id: "EU-WEST5",
+    region: "Europe",
+    country: "Netherlands", city: "Amsterdam",
+    activeMW: "", expansionMW: "", capacityMW: "",
+    type: "Colocation", status: "Announced",
+    coordinates: [4.9041, 52.3676],
     date: [
       { quarter: 1, year: 26, power: "-", type: "announced"},
     ]

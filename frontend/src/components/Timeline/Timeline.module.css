@@ -26,11 +26,18 @@
 }
 
 /* region selector */
+
+
+  .filterContainer {
+    position: relative;
+    z-index: var(--z-base);
+    display: flex;
+    align-items: center;
+
+  }
   .regionSelector {
-  position: relative;
-  z-index: var(--z-base);
-  display: flex;
-  align-items: center;
+
+
   gap: 12px;
   flex-wrap: wrap;
   padding: 10px 14px;
