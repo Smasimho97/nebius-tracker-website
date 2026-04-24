@@ -13,6 +13,8 @@ import markerStyles from "./Marker.module.css";
 import MapHeader from "../Header/MapHeader/MapHeader.jsx";
 import { nebiusSites } from "../../data/nebiusSites.js";
 
+const isMobileDevice = window.matchMedia ('(pointer:coarse)').matches;
+
 const worldGeoUrl =
   "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json";
 const usGeoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
@@ -184,7 +186,8 @@ export default function MapChart() {
                   }
                   onMouseEnter={() => setActiveMarker(site.datacenter_id)}
                   onMouseLeave={() => setActiveMarker(null)}
-                >
+                  onClick={isMobileDevice ? () => setActiveMarker(prev => prev === site.datacenter_id ? null : site.datacenter_id)
+                                          : undefined}>
                   <g className={markerStyles.markerSvg}>
                     {/* Cylinder body - scaled to 60% */}
                     <path

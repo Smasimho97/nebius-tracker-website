@@ -1,0 +1,116 @@
+
+@keyframes slideUp {
+  0%   { transform: translateY(-20px); opacity: 0; }
+  100% { transform: translateY(0);     opacity: 1; }
+}
+
+.ratingsContainer {
+  display: flex;
+  flex-direction: column;
+
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(0px) saturate(160%);
+  -webkit-backdrop-filter: blur(0px) saturate(160%);
+  border-top: none;
+  border: 1px solid rgba(30, 50, 70, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 2px 16px rgba(30, 50, 70, 0.08);
+
+  animation: slideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.ratingsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 0.875rem;
+  height: 1.75rem;
+
+  background: rgb(222, 228, 234);
+  border-radius: 8px 8px 0 0;
+  border-bottom: 1px solid rgba(30, 50, 70, 0.08);
+  color: rgba(30, 50, 70, 0.75);
+
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.toggleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+
+}
+
+.ratingsRowContainer {
+    display: flex;
+    flex-direction: column;
+    max-height: 195px;
+    overflow-y: auto;  
+    scrollbar-width: none;
+}
+
+.ratingsLightRowContainer, .ratingsDarkRowContainer {
+  display: grid;
+  grid-template-columns: 0.7fr 1.5fr 1.1fr 0.7fr .25fr;
+  align-items: center;
+
+  width: clamp(300px, 95vw, 600px);
+  height: 1.75rem;
+  padding: 0.5rem 0.875rem;
+  column-gap: 1.25rem;
+
+  font-family: var(--font-secondary);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+}
+
+.ratingsLightRowContainer {
+  background: transparent;
+  border-bottom: 1px solid rgba(30, 50, 70, 0.05);
+  color: rgba(30, 50, 70, 0.75);
+}
+
+.ratingsDarkRowContainer {
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(30, 50, 70, 0.05);
+  color: rgba(30, 50, 70, 0.75);
+}
+
+.ratingsLightRowContainer > *:nth-child(5),
+.ratingsDarkRowContainer > *:nth-child(5) {
+  justify-self: center;
+}
+
+/* --- cell helpers --- */
+.muted { color: rgba(30, 50, 70, 0.35); }
+
+.badgeRaised { font-size: 8.5px; padding: 1px 5px; border-radius: 3px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; background: rgba(0,200,120,0.15); color: #065; }
+.badgeInit   { font-size: 8.5px; padding: 1px 5px; border-radius: 3px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; background: rgba(80,140,255,0.15); color: #036; }
+.badgeMaint  { font-size: 8.5px; padding: 1px 5px; border-radius: 3px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; background: rgba(150,150,150,0.15); color: #555; }
+.badgeLowered { font-size: 8.5px; padding: 1px 5px; border-radius: 3px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; background: rgba(180, 40, 40, 0.1); color: #993c1d; }
+
+
+.ptUp   { color: #1a7a4a; font-weight: 500; }
+.ptNew  { color: #3366cc; font-weight: 500; }
+.ptFlat { color: rgba(20, 20, 20, 0.45); font-weight: 500;}
+.ptDown { color: #993c1d; font-weight: 500; }
+
+
+@media (max-width: 570px) {
+    .ratingsLightRowContainer, .ratingsDarkRowContainer {
+        font-size: 8px;
+    }
+
+    .badgeRaised, .badgeInit, .badgeMaint, .badgeLowered {
+        font-size: 7px;
+    }
+}

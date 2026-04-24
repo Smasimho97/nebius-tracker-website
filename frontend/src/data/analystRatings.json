@@ -1,0 +1,282 @@
+[
+  {
+    "date": "2026-03-24",
+    "firm": "B of A Securities",
+    "rating": "Buy",
+    "action": "initiated",
+    "prev_target": null,
+    "new_target": 150.0
+  },
+  {
+    "date": "2026-03-16",
+    "firm": "DA Davidson",
+    "rating": "Buy",
+    "action": "raised",
+    "prev_target": 150.0,
+    "new_target": 200.0
+  },
+  {
+    "date": "2026-03-16",
+    "firm": "BWS Financial",
+    "rating": "Buy",
+    "action": "raised",
+    "prev_target": 130.0,
+    "new_target": 200.0
+  },
+  {
+    "date": "2026-03-16",
+    "firm": "Citigroup",
+    "rating": "Buy",
+    "action": "initiated",
+    "prev_target": null,
+    "new_target": 169.0
+  },
+  {
+    "date": "2026-02-18",
+    "firm": "Compass Point",
+    "rating": "Buy",
+    "action": "initiated",
+    "prev_target": null,
+    "new_target": 150.0
+  },
+  {
+    "date": "2026-02-17",
+    "firm": "BWS Financial",
+    "rating": "Buy",
+    "action": "maintained",
+    "prev_target": 130.0,
+    "new_target": 130.0
+  },
+  {
+    "date": "2026-01-15",
+    "firm": "Morgan Stanley",
+    "rating": "Equal-Weight",
+    "action": "initiated",
+    "prev_target": null,
+    "new_target": 126.0
+  },
+  {
+    "date": "2025-11-19",
+    "firm": "Citizens",
+    "rating": "Market Outperform",
+    "action": "initiated",
+    "prev_target": null,
+    "new_target": 175.0
+  },
+  {
+    "date": "2025-11-13",
+    "firm": "BWS Financial",
+    "rating": "Buy",
+    "action": "maintained",
+    "prev_target": 130.0,
+    "new_target": 130.0
+  },
+  {
+    "date": "2025-11-12",
+    "firm": "Northland Capital Markets",
+    "rating": "Outperform",
+    "action": "raised",
+    "prev_target": 206.0,
+    "new_target": 211.0
+  },
+  {
+    "date": "2025-11-12",
+    "firm": "DA Davidson",
+    "rating": "Buy",
+    "action": "maintained",
+    "prev_target": 150.0,
+    "new_target": 150.0
+  },
+  {
+    "date": "2025-11-11",
+    "firm": "CICC",
+    "rating": "Outperform",
+    "action": "initiated",
+    "prev_target": null,
+    "new_target": 143.0
+  },
+  {
+    "date": "2025-09-17",
+    "firm": "Goldman Sachs",
+    "rating": "Buy",
+    "action": "maintained",
+    "prev_target": 120.0,
+    "new_target": 120.0
+  },
+  {
+    "date": "2025-09-15",
+    "firm": "Seaport Global",
+    "rating": "Neutral",
+    "action": "initiated",
+    "prev_target": null,
+    "new_target": "-"
+  },
+  {
+    "date": "2025-09-10",
+    "firm": "DA Davidson",
+    "rating": "Buy",
+    "action": "raised",
+    "prev_target": 75.0,
+    "new_target": 125.0
+  },
+  {
+    "date": "2025-09-09",
+    "firm": "BWS Financial",
+    "rating": "Buy",
+    "action": "raised",
+    "prev_target": 90.0,
+    "new_target": 130.0
+  },
+  {
+    "date": "2025-09-09",
+    "firm": "DA Davidson",
+    "rating": "Buy",
+    "action": "maintained",
+    "prev_target": 75.0,
+    "new_target": 75.0
+  },
+  {
+    "date": "2025-08-08",
+    "firm": "DA Davidson",
+    "rating": "Buy",
+    "action": "raised",
+    "prev_target": 65.0,
+    "new_target": 75.0
+  },
+  {
+    "date": "2025-08-08",
+    "firm": "BWS Financial",
+    "rating": "Buy",
+    "action": "raised",
+    "prev_target": 80.0,
+    "new_target": 90.0
+  },
+  {
+    "date": "2025-08-05",
+    "firm": "DA Davidson",
+    "rating": "Buy",
+    "action": "raised",
+    "prev_target": 55.0,
+    "new_target": 65.0
+  },
+  {
+    "date": "2025-07-14",
+    "firm": "Goldman Sachs",
+    "rating": "Buy",
+    "action": "initiated",
+    "prev_target": null,
+    "new_target": 68.0
+  },
+  {
+    "date": "2025-06-16",
+    "firm": "DA Davidson",
+    "rating": "Buy",
+    "action": "raised",
+    "prev_target": 50.0,
+    "new_target": 55.0
+  },
+  {
+    "date": "2025-06-10",
+    "firm": "BWS Financial",
+    "rating": "Buy",
+    "action": "raised",
+    "prev_target": 60.0,
+    "new_target": 80.0
+  },
+  {
+    "date": "2025-05-21",
+    "firm": "Northland Capital Markets",
+    "rating": "Outperform",
+    "action": "raised",
+    "prev_target": 34.0,
+    "new_target": 47.0
+  },
+  {
+    "date": "2025-05-21",
+    "firm": "DA Davidson",
+    "rating": "Buy",
+    "action": "raised",
+    "prev_target": 45.0,
+    "new_target": 50.0
+  },
+  {
+    "date": "2025-05-21",
+    "firm": "BWS Financial",
+    "rating": "Buy",
+    "action": "maintained",
+    "prev_target": 60.0,
+    "new_target": 60.0
+  },
+  {
+    "date": "2025-05-19",
+    "firm": "DA Davidson",
+    "rating": "Buy",
+    "action": "raised",
+    "prev_target": 35.0,
+    "new_target": 45.0
+  },
+  {
+    "date": "2025-05-12",
+    "firm": "DA Davidson",
+    "rating": "Buy",
+    "action": "raised",
+    "prev_target": 30.0,
+    "new_target": 35.0
+  },
+  {
+    "date": "2025-05-06",
+    "firm": "Northland Capital Markets",
+    "rating": "Outperform",
+    "action": "initiated",
+    "prev_target": null,
+    "new_target": 34.0
+  },
+  {
+    "date": "2025-04-14",
+    "firm": "DA Davidson",
+    "rating": "Buy",
+    "action": "lowered",
+    "prev_target": 50.0,
+    "new_target": 30.0
+  },
+  {
+    "date": "2025-03-04",
+    "firm": "BWS Financial",
+    "rating": "Buy",
+    "action": "maintained",
+    "prev_target": 60.0,
+    "new_target": 60.0
+  },
+  {
+    "date": "2025-02-25",
+    "firm": "DA Davidson",
+    "rating": "Buy",
+    "action": "initiated",
+    "prev_target": null,
+    "new_target": 50.0
+  },
+  {
+    "date": "2025-02-21",
+    "firm": "BWS Financial",
+    "rating": "Buy",
+    "action": "raised",
+    "prev_target": 51.0,
+    "new_target": 60.0
+  },
+  {
+    "date": "2025-01-28",
+    "firm": "BWS Financial",
+    "rating": "Buy",
+    "action": "maintained",
+    "prev_target": 51.0,
+    "new_target": 51.0
+  },
+  {
+    "date": "2025-01-13",
+    "firm": "BWS Financial",
+    "rating": "Buy",
+    "action": "initiated",
+    "prev_target": null,
+    "new_target": 51.0
+  }
+]

@@ -11,9 +11,9 @@ export const nebiusSites = [
       { quarter: 1, year: 25, power: "-", type: "announced"},
       { quarter: 4, year: 25, power: 70,  type: "actual" },
       { quarter: 1, year: 26, power: 125,  type: "actual"},
-      { quarter: 2, year: 26, power: 200,  type: "target"},
-      { quarter: 3, year: 26, power: 275,  type: "target"},
-      { quarter: 4, year: 26, power: 350,  type: "target"},
+      { quarter: 2, year: 26, power: 175,  type: "target"},
+      { quarter: 3, year: 26, power: 225,  type: "target"},
+      { quarter: 4, year: 26, power: 275,  type: "target"},
     ]
   },
   {
@@ -94,8 +94,22 @@ export const nebiusSites = [
       { quarter: 1, year: 26, power: 75, type: "actual", flag: "?" },
     ]
   },
+
   {
     datacenter_id: "EU-NORTH2",
+    region: "Europe",
+    country: "Finland", city: "Lappeenranta",
+    activeMW: "", expansionMW: "", capacityMW: 310,
+    type: "Owned", status: "Active",
+    coordinates: [28.1887, 61.0587],
+    date: [
+      { quarter: 1, year: 25, power: "-", type: "announced" },
+      { quarter: 4, year: 27, power: 155, type: "target"},
+    ]
+  },
+
+  {
+    datacenter_id: "EU-NORTH3",
     region: "Europe",
     country: "Iceland", city: "Keflavík",
     activeMW: 10, expansionMW: "", capacityMW: 10,
@@ -109,7 +123,7 @@ export const nebiusSites = [
     datacenter_id: "UKSOUTH1",
     region: "Europe",
     country: "UK", city: "Surrey",
-    activeMW: 16, expansionMW: "", capacityMW: 16,
+    activeMW: 16, expansionMW: 12, capacityMW: 28,
     type: "Colocation", status: "Active",
     coordinates: [-0.5861, 51.3778],
     markerCoordinates: [-0.5861, 51],

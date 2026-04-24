@@ -15,7 +15,7 @@
 }
 
 .timelineGrid {
-  z-index: 1;
+  z-index: var(--z-base);
   display: grid;
   row-gap: 4px;
   column-gap: 4px;
@@ -24,6 +24,78 @@
   background: transparent;
   min-width: max-content;
 }
+
+/* region selector */
+  .regionSelector {
+  position: relative;
+  z-index: var(--z-base);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  background: #fff;
+  color: white;
+  width: fit-content;
+}
+
+.regionSelectorLabel {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #aaa;
+  white-space: nowrap;
+}
+
+.region-selector__pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.region-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 99px;
+  border: 0.5px solid rgba(0, 0, 0, 0.18);
+  background: transparent;
+  color: #888;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s, border-color 0.1s;
+  user-select: none;
+}
+
+.region-pill__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* per-region colors */
+.regionPillNa  { --pill-bg: #E6F1FB; --pill-text: #0C447C; --dot-color: #378ADD; }
+.region-pill--eu  { --pill-bg: #E1F5EE; --pill-text: #085041; --dot-color: #1D9E75; }
+.region-pill--apac { --pill-bg: #FAEEDA; --pill-text: #633806; --dot-color: #BA7517; }
+.region-pill--latam { --pill-bg: #FBEAF0; --pill-text: #72243E; --dot-color: #D4537E; }
+.region-pill--mena { --pill-bg: #EEEDFE; --pill-text: #3C3489; --dot-color: #7F77DD; }
+
+.region-pill__dot {
+  background: var(--dot-color);
+}
+
+.region-pill.is-active {
+  background: var(--pill-bg);
+  color: var(--pill-text);
+  border-color: transparent;
+}
+
 
 /* region */
 .regionContainer {
@@ -100,7 +172,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
-  z-index: 2;
+  z-index: var(--z-elevated);
   width: 12rem;
   height: 100%;
   padding: 0;
@@ -146,8 +218,8 @@
 }
 
 .swatchActive    { background: rgba(136, 191, 255, 0.8); }
-.swatchTarget    { background: rgba(255, 136, 136, 0.8); }
-.swatchAnnounced { background: rgba(122, 146, 171, 0.35); }
+.swatchTarget    { background: rgba(180, 180, 180, 0.8); }
+.swatchAnnounced { background: rgba(174, 208, 244, 0.158); }
 
 /* date axis */
 .dateContainer {
@@ -213,7 +285,7 @@
 }
 
 .target {
-  background: rgba(255, 136, 136, 0.235);
+  background: rgba(180, 180, 180, 0.235);
   box-shadow:
     0 0.1px 0 rgba(255, 255, 255, 0.6) inset,
     0 -0.5px 0 rgba(0, 0, 0, 0.1) inset,
@@ -238,7 +310,7 @@
 }
 
 .target:hover {
-  background: rgba(204, 153, 153, 0.4);
+  background:rgba(180, 180, 180, 0.45);
   box-shadow:
     0 0.3px 0 rgba(255, 255, 255, 0.25) inset,
     0 -0.5px 0 rgba(0, 0, 0, 0.08) inset,

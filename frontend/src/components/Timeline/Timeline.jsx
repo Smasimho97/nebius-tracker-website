@@ -39,6 +39,7 @@ export default function Timeline() {
             <MetallicDrift/>
             <div className={styles.container}>
 
+
                 <div className={styles.timelineGrid}
                      style={{
                         gridTemplateColumns: `12.125rem repeat(${timelineDate.length}, 4.125rem)`, 

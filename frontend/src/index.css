@@ -41,6 +41,14 @@
   /* Typography */
   --font-primary: "Chakra Petch", sans-serif;
   --font-secondary: 'DM Mono', 'Courier New', monospace;
+
+  /* Z-Index Scale */
+  --z-background: 0;   /* WebGL canvas backgrounds */
+  --z-base: 1;         /* Base content layers */
+  --z-elevated: 2;     /* Elevated content within a section */
+  --z-dropdown: 10;    /* Header dropdown menus */
+  --z-header: 100;     /* Page headers */
+  --z-overlay: 200;    /* Modal overlays */
 }
 
 html {
