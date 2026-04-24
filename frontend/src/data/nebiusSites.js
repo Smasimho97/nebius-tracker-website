@@ -99,7 +99,7 @@ export const nebiusSites = [
     datacenter_id: "EU-NORTH2",
     region: "Europe",
     country: "Finland", city: "Lappeenranta",
-    activeMW: "", expansionMW: "", capacityMW: 310,
+    activeMW: 0, expansionMW: "", capacityMW: 310,
     type: "Owned", status: "Active",
     coordinates: [28.1887, 61.0587],
     date: [
